@@ -1,14 +1,352 @@
 <!doctype html>
 <html lang="en">
-  <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<!-- <link href="https://fonts.googleapis.com/css?family=Fahkwang" rel="stylesheet"> -->
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<title>Masterwork</title>
-  </head>
-  <body>
-  
-	<script type="text/javascript" src="script.js"></script>
-  </body>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, height=device-height initial-scale=1, shrink-to-fit=no">
+		<link href="https://fonts.googleapis.com/css?family=Fahkwang" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<title>Dartz Calculator</title>
+	</head>
+	<body>
+		<main id="site-container">
+			<!-- <div class="player-setup">
+				<strong>Chose Number Of Players</strong>
+				<menu>
+					<input class="player-val" type="radio" name="player" value="2"> Two
+					<input class="player-val" type="radio" name="player" value="3"> Three
+					<input class="player-val" type="radio" name="player" value="4" checked="true"> Four
+				</menu>
+				<button class="player-ok">Ok</button>
+			</div> -->
+			<!-- <div class="game">
+				<strong>Chose Game Type</strong>
+				<menu>
+					<input class="game-val" type="radio" name="game" value="301"> 301
+					<input class="game-val checked" type="radio" name="game" value="501" checked="true"> 501
+					<input class="game-val" type="radio" name="game" value="701"> 701
+				</menu>
+				<button class="game-ok">Ok</button>
+			</div> -->
+			<section id="players">
+				<ul class="player active">
+					<li data-value="25" score-value="0" class="num num25">
+						25
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="20" score-value="0" class="num num20">
+						20
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="19" score-value="0" class="num num19">
+						19
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="18" score-value="0" class="num num18">
+						18
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="17" score-value="0" class="num num17">
+						17
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="16" score-value="0" class="num num16">
+						16
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="15" score-value="0" class="num num15">
+						15
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li class="num negative-score" score-value="0" data-value="0">0</li>
+				</ul>
+				<ul class="player">
+					<li data-value="25" score-value="0" class="num num25">
+						25
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="20" score-value="0" class="num num20">
+						20
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="19" score-value="0" class="num num19">
+						19
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="18" score-value="0" class="num num18">
+						18
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="17" score-value="0" class="num num17">
+						17
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="16" score-value="0" class="num num16">
+						16
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="15" score-value="0" class="num num15">
+						15
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li class="num negative-score" score-value="0" data-value="0">0</li>
+				</ul>
+				<ul class="player">
+					<li data-value="25" score-value="0" class="num num25">
+						25
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="20" score-value="0" class="num num20">
+						20
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="19" score-value="0" class="num num19">
+						19
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="18" score-value="0" class="num num18">
+						18
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="17" score-value="0" class="num num17">
+						17
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="16" score-value="0" class="num num16">
+						16
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="15" score-value="0" class="num num15">
+						15
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li class="num negative-score" score-value="0" data-value="0">0</li>
+				</ul>
+				<ul class="player">
+					<li data-value="25" score-value="0" class="num num25">
+						25
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="20" score-value="0" class="num num20">
+						20
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="19" score-value="0" class="num num19">
+						19
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="18" score-value="0" class="num num18">
+						18
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="17" score-value="0" class="num num17">
+						17
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="16" score-value="0" class="num num16">
+						16
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li data-value="15" score-value="0" class="num num15">
+						15
+						<span class='point'></span>
+						<span class='point'></span>
+						<span class='point'></span>
+					</li>
+					<li class="num negative-score" score-value="0" data-value="0">0</li>
+				</ul>
+			</section>
+			<section id="buttonz">
+				<div id="numbers"></div>
+				<div id="functions">
+					<div class="func-buttons">
+						<span class="next">NEXT</span>
+						<span class="double">DOUBLE</span>
+						<span class="tripple">TRIPPLE</span>
+					</div>
+				</div>
+			</section>
+		</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<!-- <div class="player-setup">
+			<strong>Chose Number Of Players</strong>
+			<menu>
+				<input class="player-val" type="radio" name="player" value="2"> Two
+				<input class="player-val" type="radio" name="player" value="3"> Three
+				<input class="player-val" type="radio" name="player" value="4" checked="true"> Four
+			</menu>
+			<button class="player-ok">Ok</button>
+		</div>
+		<div class="game">
+			<strong>Chose Game Type</strong>
+			<menu>
+				<input class="game-val" type="radio" name="game" value="301"> 301
+				<input class="game-val checked" type="radio" name="game" value="501" checked="true"> 501
+				<input class="game-val" type="radio" name="game" value="701"> 701
+			</menu>
+			<button class="game-ok">Ok</button>
+		</div>
+		<main class="container">
+			<section class="player">
+				<div class="cover"></div>
+				<div class="score">
+					<span data-value="501" class="score-number">-</span>
+					<p class="victories">Victories: <em class="vic-num">0</em></p>
+				</div>
+				<div class="buttons">
+					<div class="numbers"></div>
+					<div class="multiplier">
+						<span class="x2">Double</span>
+						<span class="x3">Tripple</span>
+						<span class="next">Next <br>Player
+							<span></span>
+						</span>
+					</div>
+					<div class="board">
+						<p class="return-score">Previous Count <br>In case of typo</p>
+						<div class="scores"></div>
+					</div>
+				</div>
+			</section>
+			<section class="player">
+				<div class="cover"></div>
+				<div class="score">
+					<span data-value="501" class="score-number">-</span>
+					<p class="victories">Victories: <em class="vic-num">0</em></p>
+
+				</div>
+				<div class="buttons">
+					<div class="numbers"></div>
+					<div class="multiplier">
+						<span class="x2">Double</span>
+						<span class="x3">Tripple</span>
+						<span class="next">Next <br>Player
+							<span></span>
+						</span>
+					</div>
+					<div class="board">
+						<p class="return-score">Previous Count <br>In case of typo</p>
+						<div class="scores"></div>
+					</div>
+				</div>
+			</section>
+			<section class="player">
+				<div class="cover"></div>
+				<div class="score">
+					<span data-value="501" class="score-number">-</span>
+					<p class="victories">Victories: <em class="vic-num">0</em></p>
+				</div>
+				<div class="buttons">
+					<div class="numbers"></div>
+					<div class="multiplier">
+						<span class="x2">Double</span>
+						<span class="x3">Tripple</span>
+						<span class="next">Next <br>Player
+							<span></span>
+						</span>
+					</div>
+					<div class="board">
+						<p class="return-score">Previous Count <br>In case of typo</p>
+						<div class="scores"></div>
+					</div>
+				</div>
+			</section>
+			<section class="player">
+				<div class="cover"></div>
+				<div class="score">
+					<span data-value="501" class="score-number">-</span>
+					<p class="victories">Victories: <em class="vic-num">0</em></p>
+				</div>
+				<div class="buttons">
+					<div class="numbers"></div>
+					<div class="multiplier">
+						<span class="x2">Double</span>
+						<span class="x3">Tripple</span>
+						<span class="next">Next <br>Player
+							<span></span>
+						</span>
+					</div>
+					<div class="board">
+						<p class="return-score">Previous Count <br>In case of typo</p>
+						<div class="scores"></div>
+					</div>
+				</div>
+			</section>
+		</main> -->
+
+		<script type="text/javascript" src="script.js"></script>
+	</body>
 </html>
