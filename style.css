@@ -83,18 +83,22 @@ body {
         text-align: center; }
         #site-container #players .player .num .point {
           position: relative;
-          display: none;
-          height: 25%; }
+          opacity: 0;
+          height: 25%;
+          transition: opacity .3s ease-in; }
           #site-container #players .player .num .point:after {
             content: "";
             position: absolute;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            height: 20px;
-            width: 20px;
+            height: 18px;
+            width: 18px;
+            filter: blur(3px);
             background: red;
             border-radius: 50%; }
+          #site-container #players .player .num .point.red {
+            opacity: 1; }
   #site-container #buttonz {
     display: flex;
     margin: 0 auto;

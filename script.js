@@ -46,6 +46,7 @@ var numberz = 0
 // 	document.querySelector('.game').style.display = "none"
 // 	document.querySelector('.player').classList.add('active')
 // })
+var currentScoreValue
 var count = 0
 for ( var i = 15; i <= 20; i++ ) {
 	string += "<span data-value='"+ i +"' class='score-value'>"+ i +"</span>"
@@ -71,8 +72,7 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 		Array.from(document.getElementsByClassName('num')).forEach(function(elm) {
 			// LOOPOVANJE KROZ SVE BROJEVE SA VREDNOSCU SELEKTOVANOG BROJA
 		var currentScore = Number(elm.getAttribute('data-value'))
-		var currentScoreValue = Number(elm.getAttribute('score-value'))
-		var totalScore = currentScore + hits
+		currentScoreValue = Number(elm.getAttribute('score-value'))
 			if ( hits == currentScore ) {
 				// USLOV DA SE PRONADJE VREDNOST IGRACA JEDNAKA SELEKTOVANOM BROJU
 				if ( elm.parentElement.classList.contains('active') ) {
@@ -81,13 +81,63 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 					// DODAVANJE SEKUNDARNE VREDNOSTI NA AKTIVNOG IGRACA
 					var scoreCalculate = currentScoreValue / hits
 					var eachScoreNumber = elm.classList[1]
-					if ( scoreCalculate >= 3 ) {
-						// USLOV ZA POREPOZNAVANJE POPUNJENOG BROJA I PROSLEDJIVANJE VREDNOSTI OSTALIMA
-						elm.classList.add('full')
-						charge()
-						// POZIV NA FUNKCIJU KOJA CE RASPOREDJIVATI NEGATIVNI REZULTAT
-					} else {
-						elm.children[scoreCalculate].style.display = "block"
+					// if ( elm.getAttribute('score-value') >= hits * 3 ) {
+					// 	// USLOV ZA POREPOZNAVANJE POPUNJENOG BROJA I PROSLEDJIVANJE VREDNOSTI OSTALIMA
+					// 	elm.classList.add('full')
+					// 	charge()
+					// 	// POZIV NA FUNKCIJU KOJA CE RASPOREDJIVATI NEGATIVNI REZULTAT
+					// }
+					if ( elm.parentElement.classList.contains('double') ) {
+						elm.setAttribute('score-value', currentScoreValue + hits * 2)
+						elm.parentElement.classList.remove('double')
+						if ( elm.getAttribute('score-value') >= hits * 3 ) {
+							elm.classList.add('full')
+							// DODAVANJE KLASE NAKON DOUBLEA, POZNAT BUG U CONSOL LOGU ZA POKUSAJ DODAVANJA NEPOSTOJECE KLASE
+							charge()
+							// POZIV NA FUNKCIJU KOJA CE RASPOREDJIVATI NEGATIVNI REZULTAT IZ DOUBLE-A
+						}
+						if ( scoreCalculate >= 2 ) {
+							return false
+						} else {
+							elm.children[scoreCalculate].classList.add('red')
+							elm.children[scoreCalculate+1].classList.add('red')
+						}
+					}
+					// DODAVANJE DOUBLE VREDNOSTI I SCORE-A
+					if ( elm.parentElement.classList.contains('tripple') ) {
+						elm.setAttribute('score-value', currentScoreValue + hits * 3)
+						elm.parentElement.classList.remove('tripple')
+						if ( elm.getAttribute('score-value') >= hits * 3 ) {
+							elm.classList.add('full')
+							// DODAVANJE KLASE NAKON DOUBLEA, POZNAT BUG U CONSOL LOGU ZA POKUSAJ DODAVANJA NEPOSTOJECE KLASE
+							charge()
+							// POZIV NA FUNKCIJU KOJA CE RASPOREDJIVATI NEGATIVNI REZULTAT IZ DOUBLE-A
+						}
+						if ( scoreCalculate >= 2 ) {
+							return false
+						} else {
+							for ( var i = 0; i <= 2; i++ ) {
+								elm.children[i].classList.add('red')
+							}
+						}
+					}
+					// DODAVANJE DOUBLE VREDNOSTI I SCORE-A
+					else {
+						if ( elm.getAttribute('score-value') >= hits * 3 ) {
+							// USLOV ZA POREPOZNAVANJE POPUNJENOG BROJA I PROSLEDJIVANJE VREDNOSTI OSTALIMA
+							elm.classList.add('full')
+							charge()
+							// POZIV NA FUNKCIJU KOJA CE RASPOREDJIVATI NEGATIVNI REZULTAT
+						}
+						// if ( scoreCalculate >=  hits * 3 ) {
+							
+						// }
+						console.log(scoreCalculate)
+						if ( scoreCalculate >= 3 ) {
+							return false
+						} else {
+							elm.children[scoreCalculate].classList.add('red')
+						}
 					}
 					//  DODAVANJE VIZUELNE VIDLJIVOSTI UNESENE VREDNOSTI
 				}
@@ -96,13 +146,16 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 				for ( var i = 0; i < document.getElementsByClassName(""+eachScoreNumber+"").length; i++ ) {
 					// LOOPOVANJE KROZ SVE KLASE NA STRANI IGRACA ZA SELEKTOVANI BROJ I SELEKTOVANJE SEKUNDARNE KLASE
 					var playerEl = document.getElementsByClassName(""+eachScoreNumber+"")[i]
-					var negativeValue = Number(playerEl.parentElement.children[7].getAttribute('score-value'))
+					// console.log(playerEl.classList.contains('full'))
+					var newCurrentScoreValue = elm.getAttribute('score-value') -  currentScoreValue
+					const negativeValue = Number(playerEl.parentElement.children[7].getAttribute('score-value'))
 					if ( !playerEl.classList.contains('full') ) {
+						console.log(negativeValue, newCurrentScoreValue)
 						// USLOV ZA DODAVANJE NEGATIVNOG REZULTATA SVIM IGRACIMA KOJI NEMAJU POPUNJENU VREDNOST
-						playerEl.parentElement.children[7].setAttribute('score-value', negativeValue + currentScore )
-						playerEl.parentElement.children[7].innerHTML = negativeValue + currentScore
-
+						playerEl.parentElement.children[7].setAttribute('score-value', negativeValue + newCurrentScoreValue)
+						playerEl.parentElement.children[7].innerHTML = negativeValue + newCurrentScoreValue
 					}
+					
 				}
 			}
 		})
@@ -113,6 +166,13 @@ document.querySelector('.double').addEventListener('click', function(){
 		document.querySelector('.active').classList.remove('double')
 	} else 
 		document.querySelector('.active').classList.add('double')
+
+})
+document.querySelector('.tripple').addEventListener('click', function(){
+	if ( document.querySelector('.active').classList.contains('tripple') ) {
+		document.querySelector('.active').classList.remove('tripple')
+	} else 
+		document.querySelector('.active').classList.add('tripple')
 
 })
 
