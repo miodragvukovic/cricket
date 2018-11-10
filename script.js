@@ -82,6 +82,7 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 					var scoreCalculate = currentScoreValue / hits
 					var eachScoreNumber = elm.classList[1]
 					if ( elm.parentElement.classList.contains('double') ) {
+						var doubleValue = hits * 2
 						elm.setAttribute('score-value', currentScoreValue + hits * 2)
 						elm.parentElement.classList.remove('double')
 						if ( elm.getAttribute('score-value') >= hits * 3 ) {
@@ -103,13 +104,10 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 						elm.parentElement.classList.remove('tripple')
 						if ( elm.getAttribute('score-value') >= hits * 3 ) {
 							charge()
-							// POZIV NA FUNKCIJU KOJA CE RASPOREDJIVATI NEGATIVNI REZULTAT IZ DOUBLE-A
+							// POZIV NA FUNKCIJU KOJA CE RASPOREDJIVATI NEGATIVNI REZULTAT IZ TRIPPLE-A
 							elm.classList.add('full')
-							// DODAVANJE KLASE NAKON DOUBLEA, POZNAT BUG U CONSOL LOGU ZA POKUSAJ DODAVANJA NEPOSTOJECE KLASE
+							// DODAVANJE KLASE NAKON TRIPPLE-A
 						}
-						// if ( scoreCalculate >=  hits * 3 ) {
-							
-						// }
 						if ( scoreCalculate >= 3 ) {
 							return false
 						} else {
@@ -118,15 +116,13 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 							}
 						}
 					}
-					// DODAVANJE DOUBLE VREDNOSTI I SCORE-A
+					// DODAVANJE TRIPPLE VREDNOSTI I SCORE-A
 					else {
 						if ( elm.getAttribute('score-value') >= hits * 3 ) {
-							// USLOV ZA POREPOZNAVANJE POPUNJENOG BROJA I PROSLEDJIVANJE VREDNOSTI OSTALIMA
-							// var scoreDifference = elm.getAttribute('score-value') - hits * 3
 							charge()
-							elm.classList.add('full')
-							
 							// POZIV NA FUNKCIJU KOJA CE RASPOREDJIVATI NEGATIVNI REZULTAT
+							elm.classList.add('full')
+							// USLOV ZA POREPOZNAVANJE POPUNJENOG BROJA I PROSLEDJIVANJE VREDNOSTI OSTALIMA
 						}
 						if ( scoreCalculate >= 3 ) {
 							return false
@@ -141,20 +137,30 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 				if ( !elm.classList.contains('full') ) {
 					scoreDifference = elm.getAttribute('score-value') - hits * 3
 					console.log(scoreDifference)
+					// for ( var o = 0; o < document.getElementsByClassName(""+eachScoreNumber+"").length; o++ ) {
+					// 	var playerElo = document.getElementsByClassName(""+eachScoreNumber+"")[o]
+					// 	var playerEloCurrent = Number(playerElo.parentElement.children[7].innerHTML)
+					// 	if ( !playerElo.classList.contains('full') ) {
+					// 		playerElo.parentElement.children[7].innerHTML = playerEloCurrent + scoreDifference
+					// 		elm.parentElement.children[7].innerHTML = elm.parentElement.children[7].getAttribute('score-value')
+					// 	}
+					// }
 				}
 				else {
 					for ( var p = 0; p < document.getElementsByClassName(""+eachScoreNumber+"").length; p++ ) {
 						// LOOPOVANJE KROZ SVE KLASE NA STRANI IGRACA ZA SELEKTOVANI BROJ I SELEKTOVANJE SEKUNDARNE KLASE
 						var playerEl = document.getElementsByClassName(""+eachScoreNumber+"")[p]
-						console.log(playerEl.parentElement)
 						// console.log(playerEl.classList.contains('full'))
 						var newCurrentScoreValue = elm.getAttribute('score-value') -  currentScoreValue
 						var negativeValue = Number(playerEl.parentElement.children[7].getAttribute('score-value'))
 						if ( !playerEl.classList.contains('full') ) {
-							// console.log(negativeValue, newCurrentScoreValue)
-							// USLOV ZA DODAVANJE NEGATIVNOG REZULTATA SVIM IGRACIMA KOJI NEMAJU POPUNJENU VREDNOST
+							if ( elm.getAttribute('score-value') == 3 * hits ) {
+								return false
+							}
+							// USLOV ZA PREVENCIJU DODAVANJA SCOREA AKO SE POPUNI DOUBLEOM
 							playerEl.parentElement.children[7].setAttribute('score-value', negativeValue + newCurrentScoreValue + scoreDifference)
 							playerEl.parentElement.children[7].innerHTML = negativeValue + newCurrentScoreValue +scoreDifference
+							// USLOV ZA DODAVANJE NEGATIVNOG REZULTATA SVIM IGRACIMA KOJI NEMAJU POPUNJENU VREDNOST
 						}
 					}
 					scoreDifference = 0
