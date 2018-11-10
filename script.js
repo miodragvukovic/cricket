@@ -81,22 +81,16 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 					// DODAVANJE SEKUNDARNE VREDNOSTI NA AKTIVNOG IGRACA
 					var scoreCalculate = currentScoreValue / hits
 					var eachScoreNumber = elm.classList[1]
-					// if ( elm.getAttribute('score-value') >= hits * 3 ) {
-					// 	// USLOV ZA POREPOZNAVANJE POPUNJENOG BROJA I PROSLEDJIVANJE VREDNOSTI OSTALIMA
-					// 	elm.classList.add('full')
-					// 	charge()
-					// 	// POZIV NA FUNKCIJU KOJA CE RASPOREDJIVATI NEGATIVNI REZULTAT
-					// }
 					if ( elm.parentElement.classList.contains('double') ) {
 						elm.setAttribute('score-value', currentScoreValue + hits * 2)
 						elm.parentElement.classList.remove('double')
 						if ( elm.getAttribute('score-value') >= hits * 3 ) {
-							elm.classList.add('full')
-							// DODAVANJE KLASE NAKON DOUBLEA, POZNAT BUG U CONSOL LOGU ZA POKUSAJ DODAVANJA NEPOSTOJECE KLASE
 							charge()
 							// POZIV NA FUNKCIJU KOJA CE RASPOREDJIVATI NEGATIVNI REZULTAT IZ DOUBLE-A
+							elm.classList.add('full')
+							// DODAVANJE KLASE NAKON DOUBLEA, POZNAT BUG U CONSOL LOGU ZA POKUSAJ DODAVANJA NEPOSTOJECE KLASE
 						}
-						if ( scoreCalculate >= 2 ) {
+						if ( scoreCalculate >= 3 ) {
 							return false
 						} else {
 							elm.children[scoreCalculate].classList.add('red')
@@ -108,12 +102,15 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 						elm.setAttribute('score-value', currentScoreValue + hits * 3)
 						elm.parentElement.classList.remove('tripple')
 						if ( elm.getAttribute('score-value') >= hits * 3 ) {
-							elm.classList.add('full')
-							// DODAVANJE KLASE NAKON DOUBLEA, POZNAT BUG U CONSOL LOGU ZA POKUSAJ DODAVANJA NEPOSTOJECE KLASE
 							charge()
 							// POZIV NA FUNKCIJU KOJA CE RASPOREDJIVATI NEGATIVNI REZULTAT IZ DOUBLE-A
+							elm.classList.add('full')
+							// DODAVANJE KLASE NAKON DOUBLEA, POZNAT BUG U CONSOL LOGU ZA POKUSAJ DODAVANJA NEPOSTOJECE KLASE
 						}
-						if ( scoreCalculate >= 2 ) {
+						// if ( scoreCalculate >=  hits * 3 ) {
+							
+						// }
+						if ( scoreCalculate >= 3 ) {
 							return false
 						} else {
 							for ( var i = 0; i <= 2; i++ ) {
@@ -125,14 +122,12 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 					else {
 						if ( elm.getAttribute('score-value') >= hits * 3 ) {
 							// USLOV ZA POREPOZNAVANJE POPUNJENOG BROJA I PROSLEDJIVANJE VREDNOSTI OSTALIMA
-							elm.classList.add('full')
+							// var scoreDifference = elm.getAttribute('score-value') - hits * 3
 							charge()
+							elm.classList.add('full')
+							
 							// POZIV NA FUNKCIJU KOJA CE RASPOREDJIVATI NEGATIVNI REZULTAT
 						}
-						// if ( scoreCalculate >=  hits * 3 ) {
-							
-						// }
-						console.log(scoreCalculate)
 						if ( scoreCalculate >= 3 ) {
 							return false
 						} else {
@@ -143,19 +138,26 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 				}
 			}
 			function charge() {
-				for ( var i = 0; i < document.getElementsByClassName(""+eachScoreNumber+"").length; i++ ) {
-					// LOOPOVANJE KROZ SVE KLASE NA STRANI IGRACA ZA SELEKTOVANI BROJ I SELEKTOVANJE SEKUNDARNE KLASE
-					var playerEl = document.getElementsByClassName(""+eachScoreNumber+"")[i]
-					// console.log(playerEl.classList.contains('full'))
-					var newCurrentScoreValue = elm.getAttribute('score-value') -  currentScoreValue
-					const negativeValue = Number(playerEl.parentElement.children[7].getAttribute('score-value'))
-					if ( !playerEl.classList.contains('full') ) {
-						console.log(negativeValue, newCurrentScoreValue)
-						// USLOV ZA DODAVANJE NEGATIVNOG REZULTATA SVIM IGRACIMA KOJI NEMAJU POPUNJENU VREDNOST
-						playerEl.parentElement.children[7].setAttribute('score-value', negativeValue + newCurrentScoreValue)
-						playerEl.parentElement.children[7].innerHTML = negativeValue + newCurrentScoreValue
+				if ( !elm.classList.contains('full') ) {
+					scoreDifference = elm.getAttribute('score-value') - hits * 3
+					console.log(scoreDifference)
+				}
+				else {
+					for ( var p = 0; p < document.getElementsByClassName(""+eachScoreNumber+"").length; p++ ) {
+						// LOOPOVANJE KROZ SVE KLASE NA STRANI IGRACA ZA SELEKTOVANI BROJ I SELEKTOVANJE SEKUNDARNE KLASE
+						var playerEl = document.getElementsByClassName(""+eachScoreNumber+"")[p]
+						console.log(playerEl.parentElement)
+						// console.log(playerEl.classList.contains('full'))
+						var newCurrentScoreValue = elm.getAttribute('score-value') -  currentScoreValue
+						var negativeValue = Number(playerEl.parentElement.children[7].getAttribute('score-value'))
+						if ( !playerEl.classList.contains('full') ) {
+							// console.log(negativeValue, newCurrentScoreValue)
+							// USLOV ZA DODAVANJE NEGATIVNOG REZULTATA SVIM IGRACIMA KOJI NEMAJU POPUNJENU VREDNOST
+							playerEl.parentElement.children[7].setAttribute('score-value', negativeValue + newCurrentScoreValue + scoreDifference)
+							playerEl.parentElement.children[7].innerHTML = negativeValue + newCurrentScoreValue +scoreDifference
+						}
 					}
-					
+					scoreDifference = 0
 				}
 			}
 		})
