@@ -99,6 +99,12 @@ body {
             border-radius: 50%; }
           #site-container #players .player .num .point.red {
             opacity: 1; }
+      #site-container #players .player .negative-score {
+        width: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 4rem; }
   #site-container #buttonz {
     display: flex;
     margin: 0 auto;

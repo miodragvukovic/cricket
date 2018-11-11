@@ -136,21 +136,26 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 			function charge() {
 				if ( !elm.classList.contains('full') ) {
 					scoreDifference = elm.getAttribute('score-value') - hits * 3
-					console.log(scoreDifference)
-					// for ( var o = 0; o < document.getElementsByClassName(""+eachScoreNumber+"").length; o++ ) {
-					// 	var playerElo = document.getElementsByClassName(""+eachScoreNumber+"")[o]
-					// 	var playerEloCurrent = Number(playerElo.parentElement.children[7].innerHTML)
-					// 	if ( !playerElo.classList.contains('full') ) {
-					// 		playerElo.parentElement.children[7].innerHTML = playerEloCurrent + scoreDifference
-					// 		elm.parentElement.children[7].innerHTML = elm.parentElement.children[7].getAttribute('score-value')
-					// 	}
-					// }
+					for ( var o = 0; o < document.getElementsByClassName(""+eachScoreNumber+"").length; o++ ) {
+						var playerElo = document.getElementsByClassName(""+eachScoreNumber+"")[o]
+						var playerEloCurrent = Number(playerElo.parentElement.children[7].innerHTML)
+						if ( !playerElo.classList.contains('full') ) {
+							if ( playerElo.parentElement.children[7] == elm.parentElement.children[7] ) {
+								elm.parentElement.children[7].innerHTML = elm.parentElement.children[7].getAttribute('score-value')
+							}
+							// USLOV ZA TACAN REZULTAT AKTIVNOG IGRACA
+							else {
+								playerElo.parentElement.children[7].setAttribute('score-value', playerEloCurrent + scoreDifference)
+								playerElo.parentElement.children[7].innerHTML = playerEloCurrent + scoreDifference
+							}
+							// PROMENA REZULTATA U SLUCAJU DOUBLE PREKO NULE
+						}
+					}
 				}
 				else {
 					for ( var p = 0; p < document.getElementsByClassName(""+eachScoreNumber+"").length; p++ ) {
 						// LOOPOVANJE KROZ SVE KLASE NA STRANI IGRACA ZA SELEKTOVANI BROJ I SELEKTOVANJE SEKUNDARNE KLASE
 						var playerEl = document.getElementsByClassName(""+eachScoreNumber+"")[p]
-						// console.log(playerEl.classList.contains('full'))
 						var newCurrentScoreValue = elm.getAttribute('score-value') -  currentScoreValue
 						var negativeValue = Number(playerEl.parentElement.children[7].getAttribute('score-value'))
 						if ( !playerEl.classList.contains('full') ) {
@@ -158,8 +163,10 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 								return false
 							}
 							// USLOV ZA PREVENCIJU DODAVANJA SCOREA AKO SE POPUNI DOUBLEOM
-							playerEl.parentElement.children[7].setAttribute('score-value', negativeValue + newCurrentScoreValue + scoreDifference)
-							playerEl.parentElement.children[7].innerHTML = negativeValue + newCurrentScoreValue +scoreDifference
+							else {
+								playerEl.parentElement.children[7].setAttribute('score-value', negativeValue + newCurrentScoreValue + scoreDifference)
+								playerEl.parentElement.children[7].innerHTML = negativeValue + newCurrentScoreValue +scoreDifference
+							}
 							// USLOV ZA DODAVANJE NEGATIVNOG REZULTATA SVIM IGRACIMA KOJI NEMAJU POPUNJENU VREDNOST
 						}
 					}
