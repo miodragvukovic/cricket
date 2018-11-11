@@ -19,7 +19,10 @@ body {
 	height: 100vh;
 	width: 100%;
 	display: flex;
+	padding-top: 5px;
 	flex-direction: column;
+	// background: linear-gradient(to bottom, rgba(43,43,43,1) 0%, rgba(19,19,19,1) 5%, rgba(28,28,28,1) 13%, rgba(28,28,28,1) 22%, rgba(17,17,17,1) 33%, rgba(44,44,44,1) 50%, rgba(71,71,71,1) 61%, rgba(102,102,102,1) 75%, rgba(89,89,89,1) 82%, rgba(0,0,0,1) 96%, rgba(76,76,76,1) 100%);
+	background: black;
 	.player-setup,
 	.game {
 		position: absolute;
@@ -32,8 +35,7 @@ body {
 		left: 50%;
 		transform: translate(-50%, -50%);
 		z-index: 3;
-		background: linear-gradient(to bottom, rgba(76,76,76,1) 0%,rgba(17,17,17,1) 0%,rgba(89,89,89,1) 12%,rgba(102,102,102,1) 33%,rgba(102,102,102,1) 33%,rgba(71,71,71,1) 49%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(0,0,0,1) 100%,rgba(19,19,19,1) 100%);
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=0 );
+		// background: linear-gradient(to bottom, rgba(76,76,76,1) 0%,rgba(17,17,17,1) 0%,rgba(89,89,89,1) 12%,rgba(102,102,102,1) 33%,rgba(102,102,102,1) 33%,rgba(71,71,71,1) 49%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(0,0,0,1) 100%,rgba(19,19,19,1) 100%);
 		border-radius: 25px;
 		border: 1px solid black;
 		color: black;
@@ -83,13 +85,14 @@ body {
 			height: 15vh;
 			border: 1px solid transparent;
 			&.active {
-				border-color: black;
+				border-color: #ccff00;
 			}
 			.num {
 				display: flex;
 				flex-direction: column;
 				flex: 1;
 				text-align: center;
+				color: rgb(140, 10, 167);
 				.point {
 					position: relative;
 					opacity: 0;
@@ -104,12 +107,19 @@ body {
 						height: 18px;
 						width: 18px;
 						filter: blur(3px);
-						background: red;
+						background: #ccff00;
 						border-radius: 50%;
 
 					}
-					&.red {
+					&.scored {
 						opacity: 1;
+					}
+				}
+				&.full {
+					.point {
+						&:after {
+							background: red;
+						}
 					}
 				}
 			}
@@ -119,6 +129,7 @@ body {
 				justify-content: center;
 				align-items: center;
 				font-size: 4rem;
+				color: rgb(140, 10, 167);
 			}
 		}
 	}
@@ -127,6 +138,7 @@ body {
 		margin: 0 auto;
 		width: 70%;
 		height: 65vh;
+		color: rgb(140, 10, 167);
 		#numbers {
 			width: 50%;
 			height: 100%;
@@ -154,7 +166,13 @@ body {
 					display: flex;
 					justify-content: center;
 					align-items: center;
+					padding: 5px 10px;
 					font-size: 2rem;
+					border: 1px solid transparent;
+					&.double-active,
+					&.tripple-active {
+						border-color: #ccff00;
+					}
 				}
 			}
 		}

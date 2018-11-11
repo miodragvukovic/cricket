@@ -1,8 +1,23 @@
+// Dear Programmer:
+// When i wrote this code only god and
+// i knew how it worked.
+// Now, only the god knows it!
+// 
+// Therefore, if u're trying to optimise
+// this routine and it fails ( most surely ),
+// please increase this counter as a
+// warning for the next person: 
+// 
+// total_hours_wasted_here: 11
+// 
 var string = ""
-var clicks = 0
+var click = 3
 var playerValue
 var gameValue
 var numberz = 0
+var count = 0
+var currentScoreValue
+
 // var checkedValue = document.querySelector('.checked').value
 // for ( var i = 0; i < document.getElementsByClassName('player-val').length; i++ ) {
 // 	document.getElementsByClassName('player-val')[i].addEventListener('click', function(){
@@ -46,27 +61,43 @@ var numberz = 0
 // 	document.querySelector('.game').style.display = "none"
 // 	document.querySelector('.player').classList.add('active')
 // })
-var currentScoreValue
-var count = 0
+
+for ( var i = 0; i < document.getElementsByClassName('player').length; i++ ) {
+	var playerLoop = document.getElementsByClassName('player')[i]
+	var stringPl = ""
+	for ( var u = 15; u <= 20; u++ ) {
+		stringPl += "<li data-value='" + u + "' score-value='0' class='num num" + u + "'>" + u + ""
+		for ( var t = 0; t < 3; t++ ) {
+			stringPl += "<span class='point'></span>"
+		}
+		stringPl += "</li>"
+	}
+	stringPl += "<li data-value='25' score-value='0' class='num num25'>25"
+	for ( var t = 0; t < 3; t++ ) {
+		stringPl += "<span class='point'></span>"
+	}
+	stringPl += "</li>"
+	stringPl += "<li class='negative-score' score-value='0'>0</li>"
+	playerLoop.innerHTML = stringPl
+}
+
 for ( var i = 15; i <= 20; i++ ) {
 	string += "<span data-value='"+ i +"' class='score-value'>"+ i +"</span>"
 }
+// for ( var i = 0; i < document.getElementsByClassName('num').length; i++ ) {
+// 	var stringP = "";
+// 	for ( var t = 0; t < 3; t++ ) {
+// 		stringP += "<span class='point'></span>"
+// 	}
+// 	document.getElementsByClassName('num')[i].insertAdjacentHTML('beforeend', stringP)
+// }
 //  DODAVANJE ELEMENATA U BROJCANIK
 var player = document.getElementsByClassName('player')
 document.querySelector('#numbers').insertAdjacentHTML('afterbegin', string)
-document.querySelector('#numbers').insertAdjacentHTML('beforeend', "<span data-value='25' class='score-value'>25</span>")
-document.querySelector('.next').addEventListener('click', function() {
-	if ( count == 3 ) {
-		document.getElementsByClassName('player')[count].classList.remove('active')
-		count = -1
-	} else 
-		document.getElementsByClassName('player')[count].classList.remove('active')
-		count = count+1
-		document.getElementsByClassName('player')[count].classList.add('active')
-})
 // DODAVANJE ACTIVE KLASE AKTIVNIM IGRICIMA
 Array.from(document.getElementsByClassName('score-value')).forEach(function(el) {
 	el.addEventListener('click', function(e){
+		click = click - 1
 		// LOOPOVANJE KROZ BROJCANIK I DODAVANJE EVENT HANDLERA
 		var hits = Number(e.target.getAttribute("data-value"))
 		Array.from(document.getElementsByClassName('num')).forEach(function(elm) {
@@ -82,9 +113,9 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 					var scoreCalculate = currentScoreValue / hits
 					var eachScoreNumber = elm.classList[1]
 					if ( elm.parentElement.classList.contains('double') ) {
-						var doubleValue = hits * 2
 						elm.setAttribute('score-value', currentScoreValue + hits * 2)
 						elm.parentElement.classList.remove('double')
+						document.querySelector('.double').classList.remove('double-active')
 						if ( elm.getAttribute('score-value') >= hits * 3 ) {
 							charge()
 							// POZIV NA FUNKCIJU KOJA CE RASPOREDJIVATI NEGATIVNI REZULTAT IZ DOUBLE-A
@@ -94,14 +125,15 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 						if ( scoreCalculate >= 3 ) {
 							return false
 						} else {
-							elm.children[scoreCalculate].classList.add('red')
-							elm.children[scoreCalculate+1].classList.add('red')
+							elm.children[scoreCalculate].classList.add('scored')
+							elm.children[scoreCalculate+1].classList.add('scored')
 						}
 					}
 					// DODAVANJE DOUBLE VREDNOSTI I SCORE-A
 					if ( elm.parentElement.classList.contains('tripple') ) {
 						elm.setAttribute('score-value', currentScoreValue + hits * 3)
 						elm.parentElement.classList.remove('tripple')
+						document.querySelector('.tripple').classList.remove('tripple-active')
 						if ( elm.getAttribute('score-value') >= hits * 3 ) {
 							charge()
 							// POZIV NA FUNKCIJU KOJA CE RASPOREDJIVATI NEGATIVNI REZULTAT IZ TRIPPLE-A
@@ -112,7 +144,7 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 							return false
 						} else {
 							for ( var i = 0; i <= 2; i++ ) {
-								elm.children[i].classList.add('red')
+								elm.children[i].classList.add('scored')
 							}
 						}
 					}
@@ -127,7 +159,7 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 						if ( scoreCalculate >= 3 ) {
 							return false
 						} else {
-							elm.children[scoreCalculate].classList.add('red')
+							elm.children[scoreCalculate].classList.add('scored')
 						}
 					}
 					//  DODAVANJE VIZUELNE VIDLJIVOSTI UNESENE VREDNOSTI
@@ -174,26 +206,70 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 				}
 			}
 		})
+		if ( click == 0 ) {
+			nextPlayer()
+			click = 3
+		}
 	})
 })
 document.querySelector('.double').addEventListener('click', function(){
+	if ( this.classList.contains('double-active') ) {
+		this.classList.remove('double-active')
+	}
+	else {
+		this.classList.add('double-active')
+	}
 	if ( document.querySelector('.active').classList.contains('double') ) {
 		document.querySelector('.active').classList.remove('double')
-	} else 
+	}
+	else {
 		document.querySelector('.active').classList.add('double')
-
-})
-document.querySelector('.tripple').addEventListener('click', function(){
+	}
 	if ( document.querySelector('.active').classList.contains('tripple') ) {
 		document.querySelector('.active').classList.remove('tripple')
-	} else 
+		document.querySelector('.tripple').classList.remove('tripple-active')
+	}
+})
+// ODUZIMANJE I DODAVANJE DOUBLE
+document.querySelector('.tripple').addEventListener('click', function(){
+	if ( this.classList.contains('tripple-active') ) {
+		this.classList.remove('tripple-active')
+	}
+	else {
+		this.classList.add('tripple-active')
+	}
+	if ( document.querySelector('.active').classList.contains('tripple') ) {
+		document.querySelector('.active').classList.remove('tripple')
+	}
+	else {
 		document.querySelector('.active').classList.add('tripple')
+	}
+	if ( document.querySelector('.active').classList.contains('double') ) {
+		document.querySelector('.active').classList.remove('double')
+		document.querySelector('.double').classList.remove('double-active')
+	}
 
 })
-
-
-
-
+// ODUZIMANJE I DODAVANJE TRIPPLE
+document.querySelector('.next').addEventListener('click', function(){
+	document.querySelector('.active').classList.remove('double')
+	document.querySelector('.double').classList.remove('double-active')
+	document.querySelector('.active').classList.remove('tripple')
+	document.querySelector('.tripple').classList.remove('tripple-active')
+	nextPlayer()
+})
+function nextPlayer() {
+	click = 3
+	if ( count >= 3 ) {
+		player[count].classList.remove('active')
+		count = 0
+		player[count].classList.add('active')	} 
+	else {
+		player[count].classList.remove('active')
+		count = count+1
+		player[count].classList.add('active')
+	}
+}
 
 
 
