@@ -44,6 +44,7 @@ body {
 		height: 300px;
 		width: 100%;
 		max-width: 500px;
+		color: #ccff00;
 	}
 	.player-setup input,
 	.game input {
@@ -84,8 +85,11 @@ body {
 			display: flex;
 			height: 15vh;
 			border: 1px solid transparent;
+			transform: scale(.9);
+			transition: all .5s;
 			&.active {
 				border-color: #ccff00;
+				transform: scale(1);
 			}
 			.num {
 				display: flex;
@@ -139,6 +143,7 @@ body {
 		width: 70%;
 		height: 65vh;
 		color: rgb(140, 10, 167);
+		opacity: 0;
 		#numbers {
 			width: 50%;
 			height: 100%;

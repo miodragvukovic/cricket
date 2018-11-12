@@ -10,43 +10,48 @@
 // 
 // total_hours_wasted_here: 11
 // 
-var playerValue
-var gameValue
 var string = ""
 var click = 3
+var playerValue
+var gameValue
 var numberz = 0
-var currentScoreValue
 var count = 0
-// GLOBALNE VARIJABLE
-var player = document.getElementsByClassName('player')
-// VARIJABLE GLOBALNIH SELEKTORA
+var currentScoreValue
+
+var checkedValue = document.querySelector('.checked').value
 for ( var i = 0; i < document.getElementsByClassName('player-val').length; i++ ) {
 	document.getElementsByClassName('player-val')[i].addEventListener('click', function(){
 		playerValue = this.value
 	})
 }
-// ODREDJIVANJE VREDNOSTI IZABRANOG BROJA IGRACA
 document.querySelector('.player-ok').addEventListener('click', function(){
 	var stringGlob = ""
-	if ( playerValue === undefined ) {
-		playerValue = document.querySelector('.checked').value
-		for ( var i = 0; i < playerValue; i++ ) {
-			stringGlob += "<ul class='player'></ul>"
-		}
-	}
-	else {
-		for ( var i = 0; i < playerValue; i++ ) {
-			stringGlob += "<ul class='player'></ul>"
-		}
+	for ( var i = 0; i < playerValue; i++ ) {
+		
+		stringGlob += "<ul class='player'></ul>"
 	}
 	document.getElementById('players').innerHTML = stringGlob
-	document.querySelector('.player-setup').style.display = "none"
-	document.getElementById('buttonz').style.opacity = "1"
+				document.querySelector('.player-setup').style.display = "none"
 	fillItUp()
 })
-// DODAVANJE IZABRANOG BROJA IGRACA I POZIV NA FUNKCIJU KOJA PRAVI TEMPLATE
-
-
+// function removal() {
+// 	var playerNum = document.getElementsByClassName('player')
+// 	if ( playerValue > 3 | playerValue === undefined) {
+// 		document.querySelector('.player-setup').style.display = "none"
+// 		document.querySelector('.game').style.display = "flex"
+// 		// document.querySelector('.container').style.opacity = "1"
+// 		playerValue = 4
+// 	}
+// 	if ( playerValue <= 3 ) {
+// 		playerNum[playerValue].remove()
+// 		if (playerNum[playerValue]) {
+// 			removal()
+// 		}
+// 			document.querySelector('.player-setup').style.display = "none"
+// 			document.querySelector('.game').style.display = "flex"
+// 			document.querySelector('.container').style.opacity = "1"
+// 	} 
+// }
 // for ( var i = 0; i < document.getElementsByClassName('game-val').length; i++ ) {
 // 	document.getElementsByClassName('game-val')[i].addEventListener('click', function(){
 // 		gameValue = this.value
@@ -66,8 +71,8 @@ document.querySelector('.player-ok').addEventListener('click', function(){
 // 	document.querySelector('.player').classList.add('active')
 // })
 function fillItUp() {
-	for ( var i = 0; i < player.length; i++ ) {
-		var playerLoop = player[i]
+	for ( var i = 0; i < document.getElementsByClassName('player').length; i++ ) {
+		var playerLoop = document.getElementsByClassName('player')[i]
 		var stringPl = ""
 		for ( var u = 15; u <= 20; u++ ) {
 			stringPl += "<li data-value='" + u + "' score-value='0' class='num num" + u + "'>" + u + ""
@@ -86,12 +91,18 @@ function fillItUp() {
 	}
 	document.querySelector('.player').classList.add('active')
 }
-// TEMPLATE ZA IGRACE
 for ( var i = 15; i <= 20; i++ ) {
 	string += "<span data-value='"+ i +"' class='score-value'>"+ i +"</span>"
 }
+// for ( var i = 0; i < document.getElementsByClassName('num').length; i++ ) {
+// 	var stringP = "";
+// 	for ( var t = 0; t < 3; t++ ) {
+// 		stringP += "<span class='point'></span>"
+// 	}
+// 	document.getElementsByClassName('num')[i].insertAdjacentHTML('beforeend', stringP)
+// }
 //  DODAVANJE ELEMENATA U BROJCANIK
-
+var player = document.getElementsByClassName('player')
 document.querySelector('#numbers').insertAdjacentHTML('afterbegin', string)
 // DODAVANJE ACTIVE KLASE AKTIVNIM IGRICIMA
 Array.from(document.getElementsByClassName('score-value')).forEach(function(el) {
@@ -182,7 +193,6 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 							// PROMENA REZULTATA U SLUCAJU DOUBLE PREKO NULE
 						}
 					}
-					scoreDifference = 0
 				}
 				else {
 					for ( var p = 0; p < document.getElementsByClassName(""+eachScoreNumber+"").length; p++ ) {
@@ -202,6 +212,7 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 							// USLOV ZA DODAVANJE NEGATIVNOG REZULTATA SVIM IGRACIMA KOJI NEMAJU POPUNJENU VREDNOST
 						}
 					}
+					scoreDifference = 0
 				}
 			}
 		})
@@ -209,7 +220,6 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 			nextPlayer()
 			click = 3
 		}
-		// AUTOMATSKO PREBACIVANJE NA SLEDECEG IGRACA
 	})
 })
 document.querySelector('.double').addEventListener('click', function(){
@@ -260,7 +270,7 @@ document.querySelector('.next').addEventListener('click', function(){
 })
 function nextPlayer() {
 	click = 3
-	if ( count >= playerValue - 1 ) {
+	if ( count >= 3 ) {
 		player[count].classList.remove('active')
 		count = 0
 		player[count].classList.add('active')	} 
@@ -270,7 +280,6 @@ function nextPlayer() {
 		player[count].classList.add('active')
 	}
 }
-// FUNKCIJA ZA PREBACIVANJE NA SLEDECEG IGRACA
 
 
 

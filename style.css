@@ -38,7 +38,8 @@ body {
   #site-container .player-setup {
     height: 300px;
     width: 100%;
-    max-width: 500px; }
+    max-width: 500px;
+    color: #ccff00; }
   #site-container .player-setup input,
   #site-container .game input {
     height: 14px;
@@ -73,9 +74,12 @@ body {
       width: 50%;
       display: flex;
       height: 15vh;
-      border: 1px solid transparent; }
+      border: 1px solid transparent;
+      transform: scale(0.9);
+      transition: all .5s; }
       #site-container #players .player.active {
-        border-color: #ccff00; }
+        border-color: #ccff00;
+        transform: scale(1); }
       #site-container #players .player .num {
         display: flex;
         flex-direction: column;
@@ -114,7 +118,8 @@ body {
     margin: 0 auto;
     width: 70%;
     height: 65vh;
-    color: #8c0aa7; }
+    color: #8c0aa7;
+    opacity: 0; }
     #site-container #buttonz #numbers {
       width: 50%;
       height: 100%;
