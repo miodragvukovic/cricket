@@ -11,6 +11,9 @@ html {
 }
 body {
 	position: relative;
+	background-image: url(dartbg.jpg);
+	background-size: cover;
+	background-position: right;
 }
 #site-container {
 	position: relative;
@@ -20,6 +23,9 @@ body {
 	padding: 15px;
 	flex-direction: column;
 	background: rgba(0, 0, 0, .9);
+	@media (max-width: 577px) {
+		padding: 5px 5px 0 5px;
+	}
 	.player-setup,
 	.game {
 		position: absolute;
@@ -99,7 +105,7 @@ body {
 	#players {
 		display: flex;
 		flex-wrap: wrap;
-		padding-bottom: 10vh;
+		padding-bottom: 5vh;
 		.player {
 			list-style: none;
 			font-size: 2rem;
@@ -108,10 +114,15 @@ body {
 			display: flex;
 			height: 20vh;
 			border: 1px solid transparent;
+			border-radius: 15px;
 			transform: scale(.9);
 			transition: all .5s;
+			@media (max-width: 577px) {
+				width: 100%;
+				height: 15vh;
+			}
 			&.active {
-				border-color: rgb(140, 10, 167);
+				border-color: rgba(140, 10, 167, .4);
 				box-shadow: 0 0 30px 12px rgba(140, 10, 167, .4);
 				transform: scale(1);
 			}
@@ -122,6 +133,9 @@ body {
 				flex: 1;
 				text-align: center;
 				color: #ccff00;
+				@media (max-width: 577px) {
+					padding: 0;
+				}
 				.point {
 					position: relative;
 					opacity: 0;
@@ -192,30 +206,49 @@ body {
 		flex-direction: column;
 		margin: 0 auto;
 		width: 70%;
-		height: 65vh;
-		color: rgb(140, 10, 167);
+		color: #ccff00;
 		opacity: 0;
+		padding: 15px 0;
+		border: 1px solid rgba(140, 10, 167, .4);
+		border-radius: 15px;
+		box-shadow: 0 0 30px 12px rgba(140, 10, 167, .4);
+		@media (max-width: 577px) {
+			height: 40vh;
+			width: 100%;
+			border: none;
+			box-shadow: none;
+		}
 		#numbers {
-			height: 15%;
 			display: flex;
 			flex-wrap: wrap;
+			justify-content: center;
 			margin-bottom: 5vh;
+			@media (max-width: 577px) {
+				margin-bottom: 2vh;
+			}
 			span {
 				margin-right: 15px;
-				border: 1px solid rgb(140, 10, 167);
+				border: 1px solid rgba(204,255,0, .4);
 				border-radius: 15px;
-				flex: 1;
+				padding: 10px 15px;
+				margin-bottom: 15px;
 				display: flex;
 				justify-content: center;
 				align-items: center;
 				font-size: 4rem;
 				transition: .4s ease;
 				cursor: pointer;
+				@media (max-width: 577px) {
+					font-size: 3rem;
+				}
 				&:last-child {
 					margin-right: 0;
 				}
 				&:active {
+					border-color: rgb(140, 10, 167);
 					background: #ccff00;
+					color: rgb(140, 10, 167);
+					transform: scale(.9);
 				}
 			}
 		}
@@ -233,16 +266,26 @@ body {
 					padding: 10px;
 					border-radius: 15px;
 					font-size: 2rem;
-					border: 1px solid rgb(140, 10, 167);
+					border: 1px solid rgba(204,255,0, .4);
 					cursor: pointer;
 					transition: .3s ease;
+					@media (max-width: 577px) {
+						font-size: 1.5rem;
+						padding: 15px;
+					}
 					&:last-child {
 						margin-right: 0;
 					}
+					&:active {
+						background: #ccff00;
+						color: rgb(140, 10, 167);
+						transform: scale(.9);
+					}
 					&.double-active,
 					&.tripple-active {
-						border-color: #ccff00;
-						color: #ccff00;
+						border-color: rgb(140, 10, 167);
+						color: rgb(140, 10, 167);
+						background: #ccff00;
 					}
 				}
 			}

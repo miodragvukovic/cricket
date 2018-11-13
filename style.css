@@ -10,7 +10,10 @@ html {
   overflow: hidden; }
 
 body {
-  position: relative; }
+  position: relative;
+  background-image: url(dartbg.jpg);
+  background-size: cover;
+  background-position: right; }
 
 #site-container {
   position: relative;
@@ -20,6 +23,9 @@ body {
   padding: 15px;
   flex-direction: column;
   background: rgba(0, 0, 0, 0.9); }
+  @media (max-width: 577px) {
+    #site-container {
+      padding: 5px 5px 0 5px; } }
   #site-container .player-setup,
   #site-container .game {
     position: absolute;
@@ -90,7 +96,7 @@ body {
   #site-container #players {
     display: flex;
     flex-wrap: wrap;
-    padding-bottom: 10vh; }
+    padding-bottom: 5vh; }
     #site-container #players .player {
       list-style: none;
       font-size: 2rem;
@@ -99,10 +105,15 @@ body {
       display: flex;
       height: 20vh;
       border: 1px solid transparent;
+      border-radius: 15px;
       transform: scale(0.9);
       transition: all .5s; }
+      @media (max-width: 577px) {
+        #site-container #players .player {
+          width: 100%;
+          height: 15vh; } }
       #site-container #players .player.active {
-        border-color: #8c0aa7;
+        border-color: rgba(140, 10, 167, 0.4);
         box-shadow: 0 0 30px 12px rgba(140, 10, 167, 0.4);
         transform: scale(1); }
       #site-container #players .player .num {
@@ -112,6 +123,9 @@ body {
         flex: 1;
         text-align: center;
         color: #ccff00; }
+        @media (max-width: 577px) {
+          #site-container #players .player .num {
+            padding: 0; } }
         #site-container #players .player .num .point {
           position: relative;
           opacity: 0;
@@ -167,29 +181,48 @@ body {
     flex-direction: column;
     margin: 0 auto;
     width: 70%;
-    height: 65vh;
-    color: #8c0aa7;
-    opacity: 0; }
+    color: #ccff00;
+    opacity: 0;
+    padding: 15px 0;
+    border: 1px solid rgba(140, 10, 167, 0.4);
+    border-radius: 15px;
+    box-shadow: 0 0 30px 12px rgba(140, 10, 167, 0.4); }
+    @media (max-width: 577px) {
+      #site-container #buttonz {
+        height: 40vh;
+        width: 100%;
+        border: none;
+        box-shadow: none; } }
     #site-container #buttonz #numbers {
-      height: 15%;
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       margin-bottom: 5vh; }
+      @media (max-width: 577px) {
+        #site-container #buttonz #numbers {
+          margin-bottom: 2vh; } }
       #site-container #buttonz #numbers span {
         margin-right: 15px;
-        border: 1px solid #8c0aa7;
+        border: 1px solid rgba(204, 255, 0, 0.4);
         border-radius: 15px;
-        flex: 1;
+        padding: 10px 15px;
+        margin-bottom: 15px;
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 4rem;
         transition: .4s ease;
         cursor: pointer; }
+        @media (max-width: 577px) {
+          #site-container #buttonz #numbers span {
+            font-size: 3rem; } }
         #site-container #buttonz #numbers span:last-child {
           margin-right: 0; }
         #site-container #buttonz #numbers span:active {
-          background: #ccff00; }
+          border-color: #8c0aa7;
+          background: #ccff00;
+          color: #8c0aa7;
+          transform: scale(0.9); }
     #site-container #buttonz #functions {
       display: flex; }
       #site-container #buttonz #functions .func-buttons {
@@ -204,13 +237,22 @@ body {
           padding: 10px;
           border-radius: 15px;
           font-size: 2rem;
-          border: 1px solid #8c0aa7;
+          border: 1px solid rgba(204, 255, 0, 0.4);
           cursor: pointer;
           transition: .3s ease; }
+          @media (max-width: 577px) {
+            #site-container #buttonz #functions .func-buttons span {
+              font-size: 1.5rem;
+              padding: 15px; } }
           #site-container #buttonz #functions .func-buttons span:last-child {
             margin-right: 0; }
+          #site-container #buttonz #functions .func-buttons span:active {
+            background: #ccff00;
+            color: #8c0aa7;
+            transform: scale(0.9); }
           #site-container #buttonz #functions .func-buttons span.double-active, #site-container #buttonz #functions .func-buttons span.tripple-active {
-            border-color: #ccff00;
-            color: #ccff00; }
+            border-color: #8c0aa7;
+            color: #8c0aa7;
+            background: #ccff00; }
 
 /*# sourceMappingURL=style.css.map */
