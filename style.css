@@ -33,7 +33,6 @@ body {
     transform: translate(-50%, -50%);
     z-index: 3;
     border-radius: 25px;
-    border: 1px solid black;
     color: black; }
   #site-container .player-setup {
     height: 300px;
