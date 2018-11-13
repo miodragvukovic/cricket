@@ -26,6 +26,10 @@ body {
   @media (max-width: 577px) {
     #site-container {
       padding: 5px 5px 0 5px; } }
+  @media (max-height: 420px) {
+    #site-container {
+      flex-direction: row;
+      overflow: hidden; } }
   #site-container .player-setup,
   #site-container .game {
     position: absolute;
@@ -97,6 +101,11 @@ body {
     display: flex;
     flex-wrap: wrap;
     padding-bottom: 5vh; }
+    @media (max-height: 420px) {
+      #site-container #players {
+        width: 70%;
+        height: 100%;
+        padding-bottom: 0; } }
     #site-container #players .player {
       list-style: none;
       font-size: 2rem;
@@ -112,6 +121,11 @@ body {
         #site-container #players .player {
           width: 100%;
           height: 15vh; } }
+      @media (max-height: 420px) {
+        #site-container #players .player {
+          width: 25%;
+          height: 100%;
+          flex-direction: column-reverse; } }
       #site-container #players .player.active {
         border-color: rgba(140, 10, 167, 0.4);
         box-shadow: 0 0 30px 12px rgba(140, 10, 167, 0.4);
@@ -126,6 +140,11 @@ body {
         @media (max-width: 577px) {
           #site-container #players .player .num {
             padding: 0; } }
+        @media (max-height: 420px) {
+          #site-container #players .player .num {
+            flex-direction: row;
+            padding: 5px;
+            align-items: center; } }
         #site-container #players .player .num .point {
           position: relative;
           opacity: 0;
@@ -144,6 +163,10 @@ body {
             border-radius: 50%; }
           #site-container #players .player .num .point.scored {
             opacity: 1; }
+          @media (max-height: 420px) {
+            #site-container #players .player .num .point {
+              height: 100%;
+              width: 25%; } }
         #site-container #players .player .num.full .point:after {
           background: red; }
       #site-container #players .player .negative-score {
@@ -153,6 +176,9 @@ body {
         padding-top: 15px;
         font-size: 4rem;
         color: #8c0aa7; }
+        @media (max-height: 420px) {
+          #site-container #players .player .negative-score {
+            width: 100%; } }
       #site-container #players .player .darts-left {
         position: absolute;
         display: flex;
@@ -160,6 +186,11 @@ body {
         height: 30px;
         bottom: 0;
         right: 0; }
+        @media (max-height: 420px) {
+          #site-container #players .player .darts-left {
+            top: 0;
+            height: 17vh;
+            flex-direction: column; } }
         #site-container #players .player .darts-left .darts-icon {
           width: 33.333%;
           position: relative;
@@ -176,6 +207,10 @@ body {
             filter: blur(3px);
             background: #ccff00;
             border-radius: 50%; }
+          @media (max-height: 420px) {
+            #site-container #players .player .darts-left .darts-icon {
+              width: 100%;
+              height: 33.333%; } }
   #site-container #buttonz {
     display: flex;
     flex-direction: column;
@@ -195,6 +230,11 @@ body {
         width: 100%;
         border: none;
         box-shadow: none; } }
+    @media (max-height: 420px) {
+      #site-container #buttonz {
+        width: 30%;
+        height: 100%;
+        padding: 0; } }
     #site-container #buttonz #numbers {
       display: flex;
       flex-wrap: wrap;
@@ -218,19 +258,69 @@ body {
         @media (max-width: 690px) {
           #site-container #buttonz #numbers span {
             font-size: 3rem; } }
+        @media (max-width: 577px) {
+          #site-container #buttonz #numbers span {
+            width: 20%;
+            margin: 2.5%; } }
+        @media (max-height: 420px) {
+          #site-container #buttonz #numbers span {
+            width: 25%;
+            margin: 2.5%;
+            font-size: 2.8rem; } }
         #site-container #buttonz #numbers span:last-child {
-          margin-right: 0; }
+          position: relative;
+          margin-right: 0;
+          width: 76px; }
+          @media (max-width: 420px) {
+            #site-container #buttonz #numbers span:last-child {
+              width: 63px; } }
+          @media (max-height: 420px) {
+            #site-container #buttonz #numbers span:last-child {
+              height: 57px; } }
+          #site-container #buttonz #numbers span:last-child:after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 15px;
+            width: 15px;
+            background: red;
+            border-radius: 50%;
+            filter: blur(2px);
+            z-index: 1; }
+          #site-container #buttonz #numbers span:last-child:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 35px;
+            width: 35px;
+            background: green;
+            border-radius: 50%;
+            filter: blur(2px); }
         #site-container #buttonz #numbers span:active {
           border-color: #8c0aa7;
           background: #ccff00;
           color: #8c0aa7;
           transform: scale(0.9); }
+          @media (max-width: 577px) {
+            #site-container #buttonz #numbers span:active {
+              transform: none; } }
+          @media (max-height: 420px) {
+            #site-container #buttonz #numbers span:active {
+              transform: none; } }
     #site-container #buttonz #functions {
       display: flex; }
       #site-container #buttonz #functions .func-buttons {
         display: flex;
         justify-content: center;
         width: 100%; }
+        @media (max-height: 420px) {
+          #site-container #buttonz #functions .func-buttons {
+            flex-direction: column;
+            max-height: 40vh; } }
         #site-container #buttonz #functions .func-buttons span {
           display: flex;
           margin-right: 15px;
@@ -242,16 +332,23 @@ body {
           border: 1px solid rgba(204, 255, 0, 0.4);
           cursor: pointer;
           transition: .3s ease; }
+          #site-container #buttonz #functions .func-buttons span:last-child {
+            margin: 0; }
           @media (max-width: 577px) {
             #site-container #buttonz #functions .func-buttons span {
               font-size: 1.5rem;
               padding: 15px; } }
-          #site-container #buttonz #functions .func-buttons span:last-child {
-            margin-right: 0; }
+          @media (max-height: 420px) {
+            #site-container #buttonz #functions .func-buttons span {
+              width: 80%;
+              margin: 1vh auto 0 !important; } }
           #site-container #buttonz #functions .func-buttons span:active {
             background: #ccff00;
             color: #8c0aa7;
             transform: scale(0.9); }
+            @media (max-height: 420px) {
+              #site-container #buttonz #functions .func-buttons span:active {
+                transform: none; } }
           #site-container #buttonz #functions .func-buttons span.double-active, #site-container #buttonz #functions .func-buttons span.tripple-active {
             border-color: #8c0aa7;
             color: #8c0aa7;

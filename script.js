@@ -10,7 +10,7 @@
 // 
 // total_hours_wasted_here: 11
 // 
-document.addEventListener('contextmenu', event => event.preventDefault());
+// document.addEventListener('contextmenu', event => event.preventDefault());
 var playerValue
 var gameValue
 var string = ""
@@ -222,6 +222,7 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 			click = 3
 		}
 		// AUTOMATSKO PREBACIVANJE NA SLEDECEG IGRACA
+	document.querySelector('.bull').style.opacity = "1"
 	})
 })
 document.querySelector('.double').addEventListener('click', function(){
@@ -244,6 +245,7 @@ document.querySelector('.double').addEventListener('click', function(){
 })
 // ODUZIMANJE I DODAVANJE DOUBLE
 document.querySelector('.tripple').addEventListener('click', function(){
+	document.querySelector('.bull').style.opacity = "0"
 	if ( this.classList.contains('tripple-active') ) {
 		this.classList.remove('tripple-active')
 	}
