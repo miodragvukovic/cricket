@@ -132,6 +132,9 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 						if ( scoreCalculate >= 3 ) {
 							return false
 						} else {
+							if ( click == 0 ) {
+								nextPlayer()
+							}
 							elm.children[scoreCalculate].classList.add('scored')
 							elm.children[scoreCalculate+1].classList.add('scored')
 						}

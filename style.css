@@ -180,13 +180,15 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    width: 70%;
     color: #ccff00;
     opacity: 0;
-    padding: 15px 0;
+    padding: 15px;
     border: 1px solid rgba(140, 10, 167, 0.4);
     border-radius: 15px;
     box-shadow: 0 0 30px 12px rgba(140, 10, 167, 0.4); }
+    @media (max-width: 690px) {
+      #site-container #buttonz {
+        padding: 15px 0; } }
     @media (max-width: 577px) {
       #site-container #buttonz {
         height: 40vh;
@@ -213,7 +215,7 @@ body {
         font-size: 4rem;
         transition: .4s ease;
         cursor: pointer; }
-        @media (max-width: 577px) {
+        @media (max-width: 690px) {
           #site-container #buttonz #numbers span {
             font-size: 3rem; } }
         #site-container #buttonz #numbers span:last-child {
