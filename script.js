@@ -82,9 +82,15 @@ function fillItUp() {
 		}
 		stringPl += "</li>"
 		stringPl += "<li class='negative-score' score-value='0'>0</li>"
+		stringPl += "<li class='darts-left'>"
+		for ( var t = 0; t < 3; t++ ) {
+			stringPl += "<span class='darts-icon'></span>"
+		}
+		stringPl += "</li>"
 		playerLoop.innerHTML = stringPl
 	}
 	document.querySelector('.player').classList.add('active')
+	dartsLeft()
 }
 // TEMPLATE ZA IGRACE
 for ( var i = 15; i <= 20; i++ ) {
@@ -97,6 +103,7 @@ document.querySelector('#numbers').insertAdjacentHTML('afterbegin', string)
 Array.from(document.getElementsByClassName('score-value')).forEach(function(el) {
 	el.addEventListener('click', function(e){
 		click = click - 1
+		document.querySelector('.active').children[8].children[click].style.opacity = "0"
 		// LOOPOVANJE KROZ BROJCANIK I DODAVANJE EVENT HANDLERA
 		var hits = Number(e.target.getAttribute("data-value"))
 		Array.from(document.getElementsByClassName('num')).forEach(function(elm) {
@@ -258,20 +265,31 @@ document.querySelector('.next').addEventListener('click', function(){
 	document.querySelector('.tripple').classList.remove('tripple-active')
 	nextPlayer()
 })
+// FUNKCIONALNOST NEXT DUGMETA
 function nextPlayer() {
+	for ( var z = 0; z < document.querySelector('.active').children[8].children.length; z++ ) {
+		document.querySelector('.active').children[8].children[z].style.opacity = "0"
+	}
 	click = 3
 	if ( count >= playerValue - 1 ) {
 		player[count].classList.remove('active')
 		count = 0
-		player[count].classList.add('active')	} 
+		player[count].classList.add('active')
+		dartsLeft()
+	} 
 	else {
 		player[count].classList.remove('active')
 		count = count+1
 		player[count].classList.add('active')
+		dartsLeft()
 	}
 }
 // FUNKCIJA ZA PREBACIVANJE NA SLEDECEG IGRACA
-
+function dartsLeft() {
+	for ( var z = 0; z < document.querySelector('.active').children[8].children.length; z++ ) {
+		document.querySelector('.active').children[8].children[z].style.opacity = "1"
+	}
+}
 
 
 

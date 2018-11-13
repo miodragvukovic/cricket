@@ -17,9 +17,9 @@ body {
   height: 100vh;
   width: 100%;
   display: flex;
-  padding-top: 5px;
+  padding: 15px;
   flex-direction: column;
-  background: black; }
+  background: rgba(0, 0, 0, 0.9); }
   #site-container .player-setup,
   #site-container .game {
     position: absolute;
@@ -43,7 +43,7 @@ body {
   #site-container .player-setup input,
   #site-container .game input {
     height: 14px;
-    widows: 14px;
+    width: 14px;
     margin-left: 15px; }
   #site-container .game {
     height: 200px;
@@ -64,28 +64,55 @@ body {
     border-radius: 35px;
     border: none;
     font-size: .7em; }
+  #site-container input[type='radio']:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #fff;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid #ccff00; }
+  #site-container input[type='radio']:checked:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #8c0aa7;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid #ccff00; }
   #site-container #players {
     display: flex;
-    flex-wrap: wrap; }
+    flex-wrap: wrap;
+    padding-bottom: 10vh; }
     #site-container #players .player {
       list-style: none;
       font-size: 2rem;
-      height: 100%;
       width: 50%;
+      position: relative;
       display: flex;
-      height: 15vh;
+      height: 20vh;
       border: 1px solid transparent;
       transform: scale(0.9);
       transition: all .5s; }
       #site-container #players .player.active {
-        border-color: #ccff00;
+        border-color: #8c0aa7;
+        box-shadow: 0 0 30px 12px rgba(140, 10, 167, 0.4);
         transform: scale(1); }
       #site-container #players .player .num {
         display: flex;
         flex-direction: column;
+        padding: 10px 0;
         flex: 1;
         text-align: center;
-        color: #8c0aa7; }
+        color: #ccff00; }
         #site-container #players .player .num .point {
           position: relative;
           opacity: 0;
@@ -110,45 +137,81 @@ body {
         width: 20%;
         display: flex;
         justify-content: center;
-        align-items: center;
+        padding-top: 15px;
         font-size: 4rem;
         color: #8c0aa7; }
+      #site-container #players .player .darts-left {
+        position: absolute;
+        display: flex;
+        width: 20%;
+        height: 30px;
+        bottom: 0;
+        right: 0; }
+        #site-container #players .player .darts-left .darts-icon {
+          width: 33.333%;
+          position: relative;
+          opacity: 0;
+          transition: .3s ease; }
+          #site-container #players .player .darts-left .darts-icon:after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            height: 18px;
+            width: 18px;
+            filter: blur(3px);
+            background: #ccff00;
+            border-radius: 50%; }
   #site-container #buttonz {
     display: flex;
+    flex-direction: column;
     margin: 0 auto;
     width: 70%;
     height: 65vh;
     color: #8c0aa7;
     opacity: 0; }
     #site-container #buttonz #numbers {
-      width: 50%;
-      height: 100%;
+      height: 15%;
       display: flex;
-      flex-wrap: wrap; }
+      flex-wrap: wrap;
+      margin-bottom: 5vh; }
       #site-container #buttonz #numbers span {
-        width: 25%;
-        height: 16.666%;
+        margin-right: 15px;
+        border: 1px solid #8c0aa7;
+        border-radius: 15px;
+        flex: 1;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 4rem; }
+        font-size: 4rem;
+        transition: .4s ease;
+        cursor: pointer; }
+        #site-container #buttonz #numbers span:last-child {
+          margin-right: 0; }
+        #site-container #buttonz #numbers span:active {
+          background: #ccff00; }
     #site-container #buttonz #functions {
-      display: flex;
-      width: 50%; }
+      display: flex; }
       #site-container #buttonz #functions .func-buttons {
-        width: 25%;
         display: flex;
-        flex-direction: column; }
+        justify-content: center;
+        width: 100%; }
         #site-container #buttonz #functions .func-buttons span {
-          width: 100%;
-          height: 16.666%;
           display: flex;
+          margin-right: 15px;
           justify-content: center;
           align-items: center;
-          padding: 5px 10px;
+          padding: 10px;
+          border-radius: 15px;
           font-size: 2rem;
-          border: 1px solid transparent; }
+          border: 1px solid #8c0aa7;
+          cursor: pointer;
+          transition: .3s ease; }
+          #site-container #buttonz #functions .func-buttons span:last-child {
+            margin-right: 0; }
           #site-container #buttonz #functions .func-buttons span.double-active, #site-container #buttonz #functions .func-buttons span.tripple-active {
-            border-color: #ccff00; }
+            border-color: #ccff00;
+            color: #ccff00; }
 
 /*# sourceMappingURL=style.css.map */
