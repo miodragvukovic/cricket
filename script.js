@@ -8,9 +8,9 @@
 // please increase this counter as a
 // warning for the next person: 
 // 
-// total_hours_wasted_here: 11
+// total_hours_wasted_here: 14
 // 
-document.addEventListener('contextmenu', event => event.preventDefault());
+// document.addEventListener('contextmenu', event => event.preventDefault());
 var playerValue
 var gameValue
 var string = ""
@@ -150,6 +150,7 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 							// POZIV NA FUNKCIJU KOJA CE RASPOREDJIVATI NEGATIVNI REZULTAT IZ TRIPPLE-A
 							elm.classList.add('full')
 							// DODAVANJE KLASE NAKON TRIPPLE-A
+							boom()
 						}
 						if ( scoreCalculate >= 3 ) {
 							return false
@@ -298,3 +299,16 @@ function dartsLeft() {
 	}
 }
 // FUNKCIJA ZA DODAVANJE STRELICA
+function boom() {
+	document.querySelector('#site-container').classList.add('shake')
+	setTimeout(function(){
+		document.querySelector('#site-container').classList.remove('shake')
+	}, 300)
+}
+// BOOOM!
+
+
+
+
+
+
