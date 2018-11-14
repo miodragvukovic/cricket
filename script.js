@@ -301,6 +301,8 @@ function dartsLeft() {
 // FUNKCIJA ZA DODAVANJE STRELICA
 function boom() {
 	document.querySelector('#site-container').classList.add('shake')
+	var audio = new Audio('fart.mp3');
+	audio.play();
 	setTimeout(function(){
 		document.querySelector('#site-container').classList.remove('shake')
 	}, 300)
