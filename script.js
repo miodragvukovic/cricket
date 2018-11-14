@@ -10,7 +10,7 @@
 // 
 // total_hours_wasted_here: 14
 // 
-// document.addEventListener('contextmenu', event => event.preventDefault())
+document.addEventListener('contextmenu', event => event.preventDefault())
 var playerValue
 var gameValue
 var string = ""
