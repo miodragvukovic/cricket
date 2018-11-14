@@ -264,7 +264,7 @@ body {
         @media (max-width: 577px) {
           #site-container #buttonz #numbers span {
             width: 20%;
-            margin: 2.5%; } }
+            margin: 1% 2.5%; } }
         @media (max-height: 420px) {
           #site-container #buttonz #numbers span {
             width: 25%;
