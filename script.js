@@ -10,7 +10,7 @@
 // 
 // total_hours_wasted_here: 14
 // 
-document.addEventListener('contextmenu', event => event.preventDefault());
+// document.addEventListener('contextmenu', event => event.preventDefault())
 var playerValue
 var gameValue
 var string = ""
@@ -105,6 +105,12 @@ document.querySelector('#numbers').insertAdjacentHTML('afterbegin', string)
 Array.from(document.getElementsByClassName('score-value')).forEach(function(el) {
 	el.addEventListener('click', function(e){
 		// LOOPOVANJE KROZ BROJCANIK I DODAVANJE EVENT HANDLERA
+		if ( el.getAttribute('data-value') == 25 ) {
+			if ( document.querySelector('.active').classList.contains('tripple') ) {
+				return false
+			}
+		}
+		// NE POSTOJI TRIPPLE 25 :)
 		click = click - 1
 		document.querySelector('.active').children[8].children[click].style.opacity = "0"
 		// FUNKCIJA ZA ODUZIMANJE BROJA STRELICA
@@ -224,7 +230,6 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 			click = 3
 		}
 		// AUTOMATSKO PREBACIVANJE NA SLEDECEG IGRACA
-	document.querySelector('.bull').style.opacity = "1"
 	})
 })
 document.querySelector('.double').addEventListener('click', function(){
@@ -247,7 +252,6 @@ document.querySelector('.double').addEventListener('click', function(){
 })
 // ODUZIMANJE I DODAVANJE DOUBLE
 document.querySelector('.tripple').addEventListener('click', function(){
-	document.querySelector('.bull').style.opacity = "0"
 	if ( this.classList.contains('tripple-active') ) {
 		this.classList.remove('tripple-active')
 	}
