@@ -10,9 +10,9 @@
 // 
 // total_hours_wasted_here: 14
 // 
-document.addEventListener('contextmenu', function(e){
-	e.preventDefault()
-})
+// document.addEventListener('contextmenu', function(e){
+// 	e.preventDefault()
+// })
 var playerValue
 var gameValue
 var string = ""
@@ -288,6 +288,7 @@ function nextPlayer() {
 	if ( count >= playerValue - 1 ) {
 		player[count].classList.remove('active')
 		count = 0
+		round()
 		player[count].classList.add('active')
 		dartsLeft()
 	} 
@@ -305,6 +306,13 @@ function dartsLeft() {
 	}
 }
 // FUNKCIJA ZA DODAVANJE STRELICA
+var roundsc = 1
+document.querySelector('#round').innerHTML = roundsc
+function round() {
+	roundsc = roundsc + 1
+	document.querySelector('#round').innerHTML = roundsc
+}
+// FUNKCIJA ZA DODAVANJE RUNDI
 function boom() {
 	document.querySelector('#site-container').classList.add('shake')
 	// fart.play()
@@ -313,9 +321,3 @@ function boom() {
 	}, 300)
 }
 // BOOOM!
-
-
-
-
-
-

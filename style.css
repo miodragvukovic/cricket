@@ -355,6 +355,11 @@ body {
             border-color: #8c0aa7;
             color: #8c0aa7;
             background: #ccff00; }
+  #site-container .round {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    color: #ccff00; }
 
 @keyframes shake {
   0% {
