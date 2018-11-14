@@ -10,7 +10,9 @@
 // 
 // total_hours_wasted_here: 14
 // 
-document.addEventListener('contextmenu', event => event.preventDefault())
+document.addEventListener('contextmenu', function(e){
+	e.preventDefault()
+})
 var playerValue
 var gameValue
 var string = ""
@@ -99,7 +101,6 @@ for ( var i = 15; i <= 20; i++ ) {
 	string += "<span data-value='"+ i +"' class='score-value'>"+ i +"</span>"
 }
 //  DODAVANJE ELEMENATA U BROJCANIK
-
 document.querySelector('#numbers').insertAdjacentHTML('afterbegin', string)
 // DODAVANJE ACTIVE KLASE AKTIVNIM IGRICIMA
 Array.from(document.getElementsByClassName('score-value')).forEach(function(el) {
