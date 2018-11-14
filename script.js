@@ -20,6 +20,7 @@ var currentScoreValue
 var count = 0
 // GLOBALNE VARIJABLE
 var player = document.getElementsByClassName('player')
+var fart = new Audio('fart.mp3')
 // VARIJABLE GLOBALNIH SELEKTORA
 for ( var i = 0; i < document.getElementsByClassName('player-val').length; i++ ) {
 	document.getElementsByClassName('player-val')[i].addEventListener('click', function(){
@@ -301,8 +302,7 @@ function dartsLeft() {
 // FUNKCIJA ZA DODAVANJE STRELICA
 function boom() {
 	document.querySelector('#site-container').classList.add('shake')
-	var audio = new Audio('fart.mp3');
-	audio.play();
+	// fart.play()
 	setTimeout(function(){
 		document.querySelector('#site-container').classList.remove('shake')
 	}, 300)
