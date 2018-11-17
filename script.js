@@ -10,9 +10,9 @@
 // 
 // total_hours_wasted_here: 14
 // 
-document.addEventListener('contextmenu', function(e){
-	e.preventDefault()
-})
+// document.addEventListener('contextmenu', function(e){
+// 	e.preventDefault()
+// })
 var playerValue
 var gameValue
 var string = ""
@@ -22,6 +22,7 @@ var currentScoreValue
 var count = 0
 // GLOBALNE VARIJABLE
 var player = document.getElementsByClassName('player')
+var players = document.querySelector('#players')
 var fart = new Audio('fart.mp3')
 // VARIJABLE GLOBALNIH SELEKTORA
 for ( var i = 0; i < document.getElementsByClassName('player-val').length; i++ ) {
@@ -43,32 +44,44 @@ document.querySelector('.player-ok').addEventListener('click', function(){
 			stringGlob += "<ul class='player'></ul>"
 		}
 	}
-	document.getElementById('players').innerHTML = stringGlob
+	players.innerHTML = stringGlob
 	document.querySelector('.player-setup').style.display = "none"
-	document.getElementById('buttonz').style.opacity = "1"
 	fillItUp()
+	if ( playerValue == 4 || playerValue === undefined ) {
+		document.querySelector('.game').style.display = "block"
+	} else {
+		players.classList.add('solo')
+		document.getElementById('players').style.opacity = "1"
+		document.getElementById('buttonz').style.opacity = "1"
+	}
+	// USLOV ZA VRSTU IGRE U ZAVISNOSTI OD BROJA IGRACA
 })
 // DODAVANJE IZABRANOG BROJA IGRACA I POZIV NA FUNKCIJU KOJA PRAVI TEMPLATE
 
 
-// for ( var i = 0; i < document.getElementsByClassName('game-val').length; i++ ) {
-// 	document.getElementsByClassName('game-val')[i].addEventListener('click', function(){
-// 		gameValue = this.value
-// 	})
-// }
-// document.querySelector('.game-ok').addEventListener('click', function(){
-// 	for ( var i = 0; i < document.getElementsByClassName('player').length; i++ ) {
-// 		document.getElementsByClassName('player')[i].setAttribute("data-value", gameValue)
-// 		document.getElementsByClassName('player')[i].innerHTML = gameValue
-// 		if ( gameValue === undefined ) {
-// 			document.getElementsByClassName('player')[i].setAttribute("data-value", checkedValue)
-// 			document.getElementsByClassName('player')[i].innerHTML = checkedValue
-// 			gameValue = checkedValue
-// 		}
-// 	}
-// 	document.querySelector('.game').style.display = "none"
-// 	document.querySelector('.player').classList.add('active')
-// })
+for ( var i = 0; i < document.getElementsByClassName('game-val').length; i++ ) {
+	document.getElementsByClassName('game-val')[i].addEventListener('click', function(){
+		gameValue = this.value
+	})
+}
+document.querySelector('.game-ok').addEventListener('click', function(){
+	if ( gameValue == "team" ) {
+		players.classList.add('team')
+		document.getElementsByClassName('player')[0].classList.add('team-1')
+		document.getElementsByClassName('player')[1].classList.add('team-2')
+		document.getElementsByClassName('player')[2].classList.add('team-1')
+		document.getElementsByClassName('player')[3].classList.add('team-2')
+		// UNDER CONSTRUCTION TEAM
+	} else {
+		players.classList.add('solo')
+	}
+	document.querySelector('.game').style.display = "none"
+	players.style.opacity = "1"
+	document.getElementById('buttonz').style.opacity = "1"
+	document.querySelector('.player').classList.remove('active')
+	document.querySelector('.player').classList.add('active')
+})
+// SOLO ILI TEAM IGRA
 function fillItUp() {
 	for ( var i = 0; i < player.length; i++ ) {
 		var playerLoop = player[i]
@@ -116,7 +129,7 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 		document.querySelector('.active').children[8].children[click].style.opacity = "0"
 		// FUNKCIJA ZA ODUZIMANJE BROJA STRELICA
 		var hits = Number(e.target.getAttribute("data-value"))
-		Array.from(document.getElementsByClassName('num')).forEach(function(elm) {
+		Array.from(document.getElementsByClassName('num')).forEach(function(elm, index) {
 			// LOOPOVANJE KROZ SVE BROJEVE SA VREDNOSCU SELEKTOVANOG BROJA
 		var currentScore = Number(elm.getAttribute('data-value'))
 		currentScoreValue = Number(elm.getAttribute('score-value'))
@@ -133,10 +146,18 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 						elm.parentElement.classList.remove('double')
 						document.querySelector('.double').classList.remove('double-active')
 						if ( elm.getAttribute('score-value') >= hits * 3 ) {
-							charge()
-							// POZIV NA FUNKCIJU KOJA CE RASPOREDJIVATI NEGATIVNI REZULTAT IZ DOUBLE-A
-							elm.classList.add('full')
-							// DODAVANJE KLASE NAKON DOUBLEA, POZNAT BUG U CONSOL LOGU ZA POKUSAJ DODAVANJA NEPOSTOJECE KLASE
+							if ( players.classList.contains('solo') ) {
+								charge()
+								// POZIV NA FUNKCIJU KOJA CE RASPOREDJIVATI NEGATIVNI REZULTAT
+								elm.classList.add('full')
+								// USLOV ZA POREPOZNAVANJE POPUNJENOG BROJA I PROSLEDJIVANJE VREDNOSTI OSTALIMA
+							} else {
+								teamCharge()
+								elm.classList.add('team-full')
+								if ( elm.classList.contains('team-full') ) {
+									elm.parentElement.classList.add(""+elm.classList[1]+"-full")
+								}
+							}
 						}
 						if ( scoreCalculate >= 3 ) {
 							return false
@@ -147,6 +168,7 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 							elm.children[scoreCalculate].classList.add('scored')
 							elm.children[scoreCalculate+1].classList.add('scored')
 						}
+
 					}
 					// DODAVANJE DOUBLE VREDNOSTI I SCORE-A
 					if ( elm.parentElement.classList.contains('tripple') ) {
@@ -154,10 +176,18 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 						elm.parentElement.classList.remove('tripple')
 						document.querySelector('.tripple').classList.remove('tripple-active')
 						if ( elm.getAttribute('score-value') >= hits * 3 ) {
-							charge()
-							// POZIV NA FUNKCIJU KOJA CE RASPOREDJIVATI NEGATIVNI REZULTAT IZ TRIPPLE-A
-							elm.classList.add('full')
-							// DODAVANJE KLASE NAKON TRIPPLE-A
+							if ( players.classList.contains('solo') ) {
+								charge()
+								// POZIV NA FUNKCIJU KOJA CE RASPOREDJIVATI NEGATIVNI REZULTAT
+								elm.classList.add('full')
+								// USLOV ZA POREPOZNAVANJE POPUNJENOG BROJA I PROSLEDJIVANJE VREDNOSTI OSTALIMA
+							} else {
+								teamCharge()
+								elm.classList.add('team-full')
+								if ( elm.classList.contains('team-full') ) {
+									elm.parentElement.classList.add(""+elm.classList[1]+"-full")
+								}
+							}
 							boom()
 						}
 						if ( scoreCalculate >= 3 ) {
@@ -171,10 +201,18 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 					// DODAVANJE TRIPPLE VREDNOSTI I SCORE-A
 					else {
 						if ( elm.getAttribute('score-value') >= hits * 3 ) {
-							charge()
-							// POZIV NA FUNKCIJU KOJA CE RASPOREDJIVATI NEGATIVNI REZULTAT
-							elm.classList.add('full')
-							// USLOV ZA POREPOZNAVANJE POPUNJENOG BROJA I PROSLEDJIVANJE VREDNOSTI OSTALIMA
+							if ( players.classList.contains('solo') ) {
+								charge()
+								// POZIV NA FUNKCIJU KOJA CE RASPOREDJIVATI NEGATIVNI REZULTAT
+								elm.classList.add('full')
+								// USLOV ZA POREPOZNAVANJE POPUNJENOG BROJA I PROSLEDJIVANJE VREDNOSTI OSTALIMA
+							} else {
+								teamCharge()
+								elm.classList.add('team-full')
+								if ( elm.classList.contains('team-full') ) {
+									elm.parentElement.classList.add(""+elm.classList[1]+"-full")
+								}
+							}
 						}
 						if ( scoreCalculate >= 3 ) {
 							return false
@@ -221,6 +259,112 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 								playerEl.parentElement.children[7].innerHTML = negativeValue + newCurrentScoreValue +scoreDifference
 							}
 							// USLOV ZA DODAVANJE NEGATIVNOG REZULTATA SVIM IGRACIMA KOJI NEMAJU POPUNJENU VREDNOST
+						}
+					}
+				}
+			}
+			// function teamCharge() {
+			// 	var teamMate = elm.parentElement.classList[1]
+			// 	var elmTeam = elm.parentElement.classList[1]
+			// 	if ( !elm.classList.contains('team-full') ) {
+			// 		scoreDifference = elm.getAttribute('score-value') - hits * 3
+			// 		for ( var o = 0; o < document.getElementsByClassName(""+eachScoreNumber+"").length; o++ ) {
+			// 			var playerElo = document.getElementsByClassName(""+eachScoreNumber+"")[o]
+			// 			var playerEloCurrent = Number(playerElo.parentElement.children[7].innerHTML)
+			// 			if ( !playerElo.classList.contains('team-full') && !playerElo.parentElement.classList.contains("" +teamMate+ "") ) {
+			// 				if ( document.getElementsByClassName("" + elmTeam + "")[0].classList.contains(""+elm.classList[1]+"-full") && document.getElementsByClassName("" + elmTeam + "")[1].classList.contains(""+elm.classList[1]+"-full") ) {
+			// 					if ( playerElo.parentElement.children[7] == elm.parentElement.children[7] ) {
+			// 						elm.parentElement.children[7].innerHTML = elm.parentElement.children[7].getAttribute('score-value')
+			// 					}
+			// 					// USLOV ZA TACAN REZULTAT AKTIVNOG IGRACA
+			// 					else {
+			// 						playerElo.parentElement.children[7].setAttribute('score-value', playerEloCurrent + scoreDifference)
+			// 						playerElo.parentElement.children[7].innerHTML = playerEloCurrent + scoreDifference
+			// 					}
+			// 					// PROMENA REZULTATA U SLUCAJU DOUBLE PREKO NULE
+			// 				} else {
+			// 					return false
+			// 				}
+			// 			}
+			// 		}
+			// 		scoreDifference = 0
+			// 	}
+			// 	else {
+			// 		for ( var p = 0; p < document.getElementsByClassName(""+eachScoreNumber+"").length; p++ ) {
+			// 			// LOOPOVANJE KROZ SVE KLASE NA STRANI IGRACA ZA SELEKTOVANI BROJ I SELEKTOVANJE SEKUNDARNE KLASE
+			// 			var playerEl = document.getElementsByClassName(""+eachScoreNumber+"")[p]
+			// 			var newCurrentScoreValue = elm.getAttribute('score-value') -  currentScoreValue
+			// 			var negativeValue = Number(playerEl.parentElement.children[7].getAttribute('score-value'))
+			// 			if ( !playerEl.classList.contains('team-full') && !playerEl.parentElement.classList.contains("" +teamMate+ "") ) {
+			// 				if ( document.getElementsByClassName("" + elmTeam + "")[0].classList.contains(""+elm.classList[1]+"-full") && document.getElementsByClassName("" + elmTeam + "")[1].classList.contains(""+elm.classList[1]+"-full") ) {
+			// 					if ( elm.getAttribute('score-value') == 3 * hits ) {
+			// 						return false
+			// 					}
+			// 					// USLOV ZA PREVENCIJU DODAVANJA SCOREA AKO SE POPUNI DOUBLEOM
+			// 					else {
+			// 						// if ( playerEl.classList.contains('team-full') &&  ) {
+			// 						playerEl.parentElement.children[7].setAttribute('score-value', negativeValue + newCurrentScoreValue + scoreDifference)
+			// 						playerEl.parentElement.children[7].innerHTML = negativeValue + newCurrentScoreValue +scoreDifference
+			// 						// }
+			// 					}
+			// 				// USLOV ZA DODAVANJE NEGATIVNOG REZULTATA SVIM IGRACIMA KOJI NEMAJU POPUNJENU VREDNOST
+			// 				} else {
+			// 					return false
+			// 				}
+			// 			}
+			// 		}
+			// 	}
+			// }
+			function teamCharge() {
+				var teamMate = elm.parentElement.classList[1]
+				var elmTeam = elm.parentElement.classList[1]
+				if ( !elm.classList.contains('team-full') ) {
+					sscoreDifference = elm.getAttribute('score-value') - hits * 3
+					for ( var o = 0; o < document.getElementsByClassName(""+eachScoreNumber+"").length; o++ ) {
+						var playerElo = document.getElementsByClassName(""+eachScoreNumber+"")[o]
+						var playerEloCurrent = Number(playerElo.parentElement.children[7].innerHTML)
+						if ( !playerElo.classList.contains('team-full') && !playerElo.parentElement.classList.contains("" +teamMate+ "") ) {
+							// USLOV DA SE IGNORISE TIMSKI IGRAC
+							if ( !document.getElementsByClassName("" + elmTeam + "")[0].classList.contains(""+elm.classList[1]+"-full") && document.getElementsByClassName("" + elmTeam + "")[1].classList.contains(""+elm.classList[1]+"-full") || document.getElementsByClassName("" + elmTeam + "")[0].classList.contains(""+elm.classList[1]+"-full") && !document.getElementsByClassName("" + elmTeam + "")[1].classList.contains(""+elm.classList[1]+"-full") ) {
+								// USLOV ZA DODAVANJE VIZUELNOG REZULTATA PRE NEGO STO TIM IMA POPUNJEN BROJ, JEBOTEEEE!
+								if ( playerElo.parentElement.children[7] == elm.parentElement.children[7] ) {
+									elm.parentElement.children[7].innerHTML = elm.parentElement.children[7].getAttribute('score-value')
+								}
+								// USLOV ZA TACAN REZULTAT AKTIVNOG IGRACA
+								else {
+									playerElo.parentElement.children[7].setAttribute('score-value', playerEloCurrent + sscoreDifference)
+									playerElo.parentElement.children[7].innerHTML = playerEloCurrent + sscoreDifference
+								}
+								// PROMENA REZULTATA U SLUCAJU DOUBLE PREKO NULE
+							} else {
+								return false
+							}
+						}
+					}
+					sscoreDifference = 0
+				}
+				else {
+					for ( var p = 0; p < document.getElementsByClassName(""+eachScoreNumber+"").length; p++ ) {
+						// LOOPOVANJE KROZ SVE KLASE NA STRANI IGRACA ZA SELEKTOVANI BROJ I SELEKTOVANJE SEKUNDARNE KLASE
+						var playerEl = document.getElementsByClassName(""+eachScoreNumber+"")[p]
+						var newCurrentScoreValue = elm.getAttribute('score-value') -  currentScoreValue
+						var negativeValue = Number(playerEl.parentElement.children[7].getAttribute('score-value'))
+						if ( !playerEl.classList.contains('team-full') && !playerEl.parentElement.classList.contains("" +teamMate+ "") ) {
+							// USLOV DA SE IGNORISE TIMSKI IGRAC
+							if ( document.getElementsByClassName("" + elmTeam + "")[0].classList.contains(""+elm.classList[1]+"-full") && document.getElementsByClassName("" + elmTeam + "")[1].classList.contains(""+elm.classList[1]+"-full") ) {
+								// USLOV ZA RACUNANJE KAD TIM IMA POPUNJEN BROJ
+								if ( elm.getAttribute('score-value') == 3 * hits ) {
+									return false
+								}
+								// USLOV ZA PREVENCIJU DODAVANJA SCOREA AKO SE POPUNI DOUBLEOM
+								else {
+									playerEl.parentElement.children[7].setAttribute('score-value', negativeValue + newCurrentScoreValue + sscoreDifference)
+									playerEl.parentElement.children[7].innerHTML = negativeValue + newCurrentScoreValue +sscoreDifference
+								}
+							// USLOV ZA DODAVANJE NEGATIVNOG REZULTATA SVIM IGRACIMA KOJI NEMAJU POPUNJENU VREDNOST
+							} else {
+								return false
+							}
 						}
 					}
 				}
@@ -321,3 +465,24 @@ function boom() {
 	}, 300)
 }
 // BOOOM!
+// var a = function() {
+// 	document.querySelector('.rrr').style.opacity = "1"
+// }
+// var b = function() {
+// 	document.querySelector('.rrr').style.opacity = "0"
+// }
+// var arr = [a, b]
+// h = -1
+// setInterval(function(){
+// 	h++
+// 	arr[h]()
+// 	if ( h == 1 ) {
+// 		h = -1
+// 	}
+// }, 2000)
+
+
+
+
+
+

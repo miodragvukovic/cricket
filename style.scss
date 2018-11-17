@@ -7,7 +7,6 @@
 }
 html {
 	font-size: 62.5%;
-	
 }
 body {
 	position: relative;
@@ -47,13 +46,12 @@ body {
 		transform: translate(-50%, -50%);
 		z-index: 3;
 		border-radius: 25px;
-		color: black;
+		color: #ccff00;
 	}
 	.player-setup {
 		height: 300px;
 		width: 100%;
 		max-width: 500px;
-		color: #ccff00;
 	}
 	.player-setup input,
 	.game input {
@@ -114,6 +112,7 @@ body {
 		display: flex;
 		flex-wrap: wrap;
 		padding-bottom: 5vh;
+		opacity: 0;
 		@media (max-height: 420px) {
 			width: 70%;
 			height: 100%;
@@ -184,7 +183,8 @@ body {
 						width: 25%;
 					}
 				}
-				&.full {
+				&.full,
+				&.team-full {
 					.point {
 						&:after {
 							background: red;
@@ -410,8 +410,6 @@ body {
 	75% {left: 5px;}
 	100% {left: 0;}
 }
-
-
 
 
 

@@ -45,12 +45,11 @@ body {
     transform: translate(-50%, -50%);
     z-index: 3;
     border-radius: 25px;
-    color: black; }
+    color: #ccff00; }
   #site-container .player-setup {
     height: 300px;
     width: 100%;
-    max-width: 500px;
-    color: #ccff00; }
+    max-width: 500px; }
   #site-container .player-setup input,
   #site-container .game input {
     height: 14px;
@@ -102,7 +101,8 @@ body {
   #site-container #players {
     display: flex;
     flex-wrap: wrap;
-    padding-bottom: 5vh; }
+    padding-bottom: 5vh;
+    opacity: 0; }
     @media (max-height: 420px) {
       #site-container #players {
         width: 70%;
@@ -169,7 +169,7 @@ body {
             #site-container #players .player .num .point {
               height: 100%;
               width: 25%; } }
-        #site-container #players .player .num.full .point:after {
+        #site-container #players .player .num.full .point:after, #site-container #players .player .num.team-full .point:after {
           background: red; }
       #site-container #players .player .negative-score {
         width: 20%;
