@@ -48,7 +48,7 @@ document.querySelector('.player-ok').addEventListener('click', function(){
 	document.querySelector('.player-setup').style.display = "none"
 	fillItUp()
 	if ( playerValue == 4 || playerValue === undefined ) {
-		document.querySelector('.game').style.display = "block"
+		document.querySelector('.game').style.display = "flex"
 	} else {
 		players.classList.add('solo')
 		document.getElementById('players').style.opacity = "1"
@@ -71,6 +71,12 @@ document.querySelector('.game-ok').addEventListener('click', function(){
 		document.getElementsByClassName('player')[1].classList.add('team-2')
 		document.getElementsByClassName('player')[2].classList.add('team-1')
 		document.getElementsByClassName('player')[3].classList.add('team-2')
+		var stringTeam = ""
+		stringTeam += "<div class='team-scores'>"
+		stringTeam += "<span class='team-one'>0</span>"
+		stringTeam += "<span class='team-two'>0</span>"
+		stringTeam += "</div>"
+		document.getElementById('players').insertAdjacentHTML('afterend', stringTeam)
 		// UNDER CONSTRUCTION TEAM
 	} else {
 		players.classList.add('solo')
@@ -334,6 +340,8 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 								else {
 									playerElo.parentElement.children[7].setAttribute('score-value', playerEloCurrent + sscoreDifference)
 									playerElo.parentElement.children[7].innerHTML = playerEloCurrent + sscoreDifference
+									document.querySelector('.team-one').innerHTML = Number(document.getElementsByClassName('player')[0].children[7].getAttribute('score-value')) + Number(document.getElementsByClassName('player')[2].children[7].getAttribute('score-value'))
+									document.querySelector('.team-two').innerHTML = Number(document.getElementsByClassName('player')[1].children[7].getAttribute('score-value')) + Number(document.getElementsByClassName('player')[3].children[7].getAttribute('score-value'))
 								}
 								// PROMENA REZULTATA U SLUCAJU DOUBLE PREKO NULE
 							} else {
@@ -360,6 +368,8 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 								else {
 									playerEl.parentElement.children[7].setAttribute('score-value', negativeValue + newCurrentScoreValue + sscoreDifference)
 									playerEl.parentElement.children[7].innerHTML = negativeValue + newCurrentScoreValue +sscoreDifference
+									document.querySelector('.team-one').innerHTML = Number(document.getElementsByClassName('player')[0].children[7].getAttribute('score-value')) + Number(document.getElementsByClassName('player')[2].children[7].getAttribute('score-value'))
+									document.querySelector('.team-two').innerHTML = Number(document.getElementsByClassName('player')[1].children[7].getAttribute('score-value')) + Number(document.getElementsByClassName('player')[3].children[7].getAttribute('score-value'))
 								}
 							// USLOV ZA DODAVANJE NEGATIVNOG REZULTATA SVIM IGRACIMA KOJI NEMAJU POPUNJENU VREDNOST
 							} else {
