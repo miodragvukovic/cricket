@@ -10,9 +10,9 @@
 // 
 // total_hours_wasted_here: 14
 // 
-document.addEventListener('contextmenu', function(e){
-	e.preventDefault()
-})
+// document.addEventListener('contextmenu', function(e){
+// 	e.preventDefault()
+// })
 var playerValue
 var gameValue
 var string = ""
@@ -57,8 +57,6 @@ document.querySelector('.player-ok').addEventListener('click', function(){
 	// USLOV ZA VRSTU IGRE U ZAVISNOSTI OD BROJA IGRACA
 })
 // DODAVANJE IZABRANOG BROJA IGRACA I POZIV NA FUNKCIJU KOJA PRAVI TEMPLATE
-
-
 for ( var i = 0; i < document.getElementsByClassName('game-val').length; i++ ) {
 	document.getElementsByClassName('game-val')[i].addEventListener('click', function(){
 		gameValue = this.value
@@ -116,11 +114,31 @@ function fillItUp() {
 	dartsLeft()
 }
 // TEMPLATE ZA IGRACE
+function eventHandlerz() {
+	var stringHandlerz = ""
+	stringHandlerz += "<div id='numbers'>"
+	for ( var i = 15; i <= 20; i++ ) {
+		stringHandlerz += "<span data-value='"+ i +"' class='score-value'>"+ i +"</span>"
+	}
+	stringHandlerz += "<span data-value='25' class='score-value bull'></span>"
+	stringHandlerz += "</div>"
+	stringHandlerz += "<div id='functions'>"
+	stringHandlerz += "<div class='func-buttons'>"
+	stringHandlerz += "<span class='double'>DOUBLE</span>"
+	stringHandlerz += "<span class='tripple'>TRIPPLE</span>"
+	stringHandlerz += "<span class='next'>NEXT</span>"
+	stringHandlerz += "</div>"
+	stringHandlerz += "</div>"
+	stringHandlerz += "<span class='round'>Round: <span id='round'></span></span>"
+	document.querySelector('#numbers').insertAdjacentHTML('afterbegin', stringHandlerz)
+}
 for ( var i = 15; i <= 20; i++ ) {
 	string += "<span data-value='"+ i +"' class='score-value'>"+ i +"</span>"
 }
-//  DODAVANJE ELEMENATA U BROJCANIK
+ // DODAVANJE ELEMENATA U BROJCANIK
 document.querySelector('#numbers').insertAdjacentHTML('afterbegin', string)
+document.querySelector('#numbers').insertAdjacentHTML('beforeend', "<span data-value='25' class='score-value bull'></span>")
+
 // DODAVANJE ACTIVE KLASE AKTIVNIM IGRICIMA
 Array.from(document.getElementsByClassName('score-value')).forEach(function(el) {
 	el.addEventListener('click', function(e){
@@ -172,7 +190,12 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 								nextPlayer()
 							}
 							elm.children[scoreCalculate].classList.add('scored')
-							elm.children[scoreCalculate+1].classList.add('scored')
+							if ( scoreCalculate <= 1 ) {
+								elm.children[scoreCalculate+1].classList.add('scored')
+							} else {
+								return false
+							}
+
 						}
 
 					}
