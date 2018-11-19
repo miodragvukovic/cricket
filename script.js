@@ -8,11 +8,11 @@
 // please increase this counter as a
 // warning for the next person: 
 // 
-// total_hours_wasted_here: 14
+// total_hours_wasted_here: 17
 // 
-// document.addEventListener('contextmenu', function(e){
-// 	e.preventDefault()
-// })
+document.addEventListener('contextmenu', function(e){
+	e.preventDefault()
+})
 var playerValue
 var gameValue
 var string = ""
@@ -114,24 +114,6 @@ function fillItUp() {
 	dartsLeft()
 }
 // TEMPLATE ZA IGRACE
-function eventHandlerz() {
-	var stringHandlerz = ""
-	stringHandlerz += "<div id='numbers'>"
-	for ( var i = 15; i <= 20; i++ ) {
-		stringHandlerz += "<span data-value='"+ i +"' class='score-value'>"+ i +"</span>"
-	}
-	stringHandlerz += "<span data-value='25' class='score-value bull'></span>"
-	stringHandlerz += "</div>"
-	stringHandlerz += "<div id='functions'>"
-	stringHandlerz += "<div class='func-buttons'>"
-	stringHandlerz += "<span class='double'>DOUBLE</span>"
-	stringHandlerz += "<span class='tripple'>TRIPPLE</span>"
-	stringHandlerz += "<span class='next'>NEXT</span>"
-	stringHandlerz += "</div>"
-	stringHandlerz += "</div>"
-	stringHandlerz += "<span class='round'>Round: <span id='round'></span></span>"
-	document.querySelector('#numbers').insertAdjacentHTML('afterbegin', stringHandlerz)
-}
 for ( var i = 15; i <= 20; i++ ) {
 	string += "<span data-value='"+ i +"' class='score-value'>"+ i +"</span>"
 }
@@ -292,58 +274,6 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 					}
 				}
 			}
-			// function teamCharge() {
-			// 	var teamMate = elm.parentElement.classList[1]
-			// 	var elmTeam = elm.parentElement.classList[1]
-			// 	if ( !elm.classList.contains('team-full') ) {
-			// 		scoreDifference = elm.getAttribute('score-value') - hits * 3
-			// 		for ( var o = 0; o < document.getElementsByClassName(""+eachScoreNumber+"").length; o++ ) {
-			// 			var playerElo = document.getElementsByClassName(""+eachScoreNumber+"")[o]
-			// 			var playerEloCurrent = Number(playerElo.parentElement.children[7].innerHTML)
-			// 			if ( !playerElo.classList.contains('team-full') && !playerElo.parentElement.classList.contains("" +teamMate+ "") ) {
-			// 				if ( document.getElementsByClassName("" + elmTeam + "")[0].classList.contains(""+elm.classList[1]+"-full") && document.getElementsByClassName("" + elmTeam + "")[1].classList.contains(""+elm.classList[1]+"-full") ) {
-			// 					if ( playerElo.parentElement.children[7] == elm.parentElement.children[7] ) {
-			// 						elm.parentElement.children[7].innerHTML = elm.parentElement.children[7].getAttribute('score-value')
-			// 					}
-			// 					// USLOV ZA TACAN REZULTAT AKTIVNOG IGRACA
-			// 					else {
-			// 						playerElo.parentElement.children[7].setAttribute('score-value', playerEloCurrent + scoreDifference)
-			// 						playerElo.parentElement.children[7].innerHTML = playerEloCurrent + scoreDifference
-			// 					}
-			// 					// PROMENA REZULTATA U SLUCAJU DOUBLE PREKO NULE
-			// 				} else {
-			// 					return false
-			// 				}
-			// 			}
-			// 		}
-			// 		scoreDifference = 0
-			// 	}
-			// 	else {
-			// 		for ( var p = 0; p < document.getElementsByClassName(""+eachScoreNumber+"").length; p++ ) {
-			// 			// LOOPOVANJE KROZ SVE KLASE NA STRANI IGRACA ZA SELEKTOVANI BROJ I SELEKTOVANJE SEKUNDARNE KLASE
-			// 			var playerEl = document.getElementsByClassName(""+eachScoreNumber+"")[p]
-			// 			var newCurrentScoreValue = elm.getAttribute('score-value') -  currentScoreValue
-			// 			var negativeValue = Number(playerEl.parentElement.children[7].getAttribute('score-value'))
-			// 			if ( !playerEl.classList.contains('team-full') && !playerEl.parentElement.classList.contains("" +teamMate+ "") ) {
-			// 				if ( document.getElementsByClassName("" + elmTeam + "")[0].classList.contains(""+elm.classList[1]+"-full") && document.getElementsByClassName("" + elmTeam + "")[1].classList.contains(""+elm.classList[1]+"-full") ) {
-			// 					if ( elm.getAttribute('score-value') == 3 * hits ) {
-			// 						return false
-			// 					}
-			// 					// USLOV ZA PREVENCIJU DODAVANJA SCOREA AKO SE POPUNI DOUBLEOM
-			// 					else {
-			// 						// if ( playerEl.classList.contains('team-full') &&  ) {
-			// 						playerEl.parentElement.children[7].setAttribute('score-value', negativeValue + newCurrentScoreValue + scoreDifference)
-			// 						playerEl.parentElement.children[7].innerHTML = negativeValue + newCurrentScoreValue +scoreDifference
-			// 						// }
-			// 					}
-			// 				// USLOV ZA DODAVANJE NEGATIVNOG REZULTATA SVIM IGRACIMA KOJI NEMAJU POPUNJENU VREDNOST
-			// 				} else {
-			// 					return false
-			// 				}
-			// 			}
-			// 		}
-			// 	}
-			// }
 			function teamCharge() {
 				var teamMate = elm.parentElement.classList[1]
 				var elmTeam = elm.parentElement.classList[1]
@@ -492,28 +422,11 @@ function round() {
 // FUNKCIJA ZA DODAVANJE RUNDI
 function boom() {
 	document.querySelector('#site-container').classList.add('shake')
-	// fart.play()
 	setTimeout(function(){
 		document.querySelector('#site-container').classList.remove('shake')
 	}, 300)
 }
 // BOOOM!
-// var a = function() {
-// 	document.querySelector('.rrr').style.opacity = "1"
-// }
-// var b = function() {
-// 	document.querySelector('.rrr').style.opacity = "0"
-// }
-// var arr = [a, b]
-// h = -1
-// setInterval(function(){
-// 	h++
-// 	arr[h]()
-// 	if ( h == 1 ) {
-// 		h = -1
-// 	}
-// }, 2000)
-
 
 
 
