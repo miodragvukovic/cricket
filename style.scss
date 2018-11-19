@@ -40,13 +40,16 @@ body {
 		justify-content: center;
 		flex-direction: column;
 		text-align: center;
-		font-size: 2.6em;
+		font-size: 2.6rem;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
 		z-index: 3;
 		border-radius: 25px;
 		color: #ccff00;
+		@media (max-width: 577px) {
+			font-size: 2rem;
+		}
 	}
 	.player-setup {
 		height: 300px;
@@ -113,6 +116,9 @@ body {
 		flex-wrap: wrap;
 		padding-bottom: 5vh;
 		opacity: 0;
+		@media (max-width: 577px) {
+			padding-bottom: 1vh;
+		}
 		@media (max-height: 420px) {
 			width: 70%;
 			height: 100%;
@@ -127,7 +133,8 @@ body {
 			.player {
 				@media (max-width: 577px) {
 					width: 100%;
-					height: 13vh;
+					height: 11vh;
+					margin-bottom: 1vh;
 				}
 				.negative-score {
 					@media (max-width: 577px) {
@@ -170,6 +177,7 @@ body {
 				color: #ccff00;
 				@media (max-width: 577px) {
 					padding: 0;
+					font-size: 1.5rem;
 				}
 				@media (max-height: 420px) {
 					flex-direction: row;
@@ -192,6 +200,10 @@ body {
 						filter: blur(3px);
 						background: #ccff00;
 						border-radius: 50%;
+						@media (max-width: 577px) {
+							height: 13px;
+							width: 13px;
+						}
 					}
 					&.scored {
 						opacity: 1;
@@ -217,6 +229,9 @@ body {
 				padding-top: 15px;
 				font-size: 4rem;
 				color: rgb(140, 10, 167);
+				@media (max-width: 577px) {
+					font-size: 3rem;
+				}
 				@media (max-height: 420px) {
 					width: 100%;
 				}
@@ -228,6 +243,9 @@ body {
 				height: 30px;
 				bottom: 0;
 				right: 0;
+				@media (max-width: 577px) {
+					height: 20px;
+				}
 				@media (max-height: 420px) {
 					top: 0;
 					height: 17vh;
@@ -249,6 +267,10 @@ body {
 						filter: blur(3px);
 						background: #ccff00;
 						border-radius: 50%;
+						@media (max-width: 577px) {
+							height: 13px;
+							width: 13px;
+						}
 					}
 					@media (max-height: 420px) {
 						width: 100%;
@@ -282,6 +304,7 @@ body {
 			color: rgb(140, 10, 167);
 			font-size: 4rem;
 			@media (max-width: 577px) {
+				font-size: 3.2rem;
 				justify-content: flex-end;
 				padding-right: 15px;
 			}
@@ -294,6 +317,9 @@ body {
 				font-size: 2rem;
 				top: 0;
 				left: 0;
+				@media (max-width: 577px) {
+					font-size: 1.3rem;
+				}
 			}
 		}
 		.team-two {
@@ -304,6 +330,9 @@ body {
 				font-size: 2rem;
 				top: 0;
 				left: 0;
+				@media (max-width: 577px) {
+					font-size: 1.3rem;
+				}
 			}
 		}
 	}
