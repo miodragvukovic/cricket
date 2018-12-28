@@ -23,7 +23,6 @@ var count = 0
 // GLOBALNE VARIJABLE
 var player = document.getElementsByClassName('player')
 var players = document.querySelector('#players')
-var fart = new Audio('fart.mp3')
 // VARIJABLE GLOBALNIH SELEKTORA
 for ( var i = 0; i < document.getElementsByClassName('player-val').length; i++ ) {
 	document.getElementsByClassName('player-val')[i].addEventListener('click', function(){
@@ -36,12 +35,12 @@ document.querySelector('.player-ok').addEventListener('click', function(){
 	if ( playerValue === undefined ) {
 		playerValue = document.querySelector('.checked').value
 		for ( var i = 0; i < playerValue; i++ ) {
-			stringGlob += "<ul class='player'></ul>"
+			stringGlob += "<ul data-full='0' class='player player-"+(i+1)+"'></ul>"
 		}
 	}
 	else {
 		for ( var i = 0; i < playerValue; i++ ) {
-			stringGlob += "<ul class='player'></ul>"
+			stringGlob += "<ul data-full='0' class='player player-"+(i+1)+"'></ul>"
 		}
 	}
 	players.innerHTML = stringGlob
@@ -338,6 +337,7 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 			click = 3
 		}
 		// AUTOMATSKO PREBACIVANJE NA SLEDECEG IGRACA
+		ending()
 	})
 })
 document.querySelector('.double').addEventListener('click', function(){
@@ -427,5 +427,31 @@ function boom() {
 	}, 300)
 }
 // BOOOM!
+function ending() {
+	for ( var pl = 0; pl < player.length; pl++ ) {
+		var parent = player[pl]
+		var parentHasClass = player[pl].getElementsByClassName("full").length
+		var hasFull = player[pl].getAttribute("data-full")
+		var max = player[0].getAttribute("data-full")
+		parent.setAttribute('data-full', parentHasClass)
+		if ( parentHasClass == 7 ) {
+			document.querySelector('.victory-overlay').style.display = "flex"
+			document.querySelector('.victory-message').innerHTML = ""+parent.classList[1]+" has won!"
+		}
+	}
+	if ( Number(document.getElementById('round').innerHTML) > 20 ) {
+		alert("Noone won!")
+	}
+}
+
+
+
+
+
+
+
+
+
+
 
 

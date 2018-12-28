@@ -10,7 +10,7 @@ html {
 }
 body {
 	position: relative;
-	background-image: url(dartbg.jpg);
+	background-image: url('http://www.tokkoro.com/picsup/1260591-darts.jpg');
 	background-size: cover;
 	background-position: right;
 	overflow: hidden;
@@ -498,6 +498,26 @@ body {
 		bottom: 5px;
 		right: 10px;
 		color: #ccff00;
+	}
+}
+.victory-overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	z-index: 2;
+	h1 {
+		margin: auto;
+		font-size: 56px;
+		color: #ccff00;
+	}
+	@media (max-width: 576px) {
+		h1 {
+			font-size: 24px;
+		}
 	}
 }
 @keyframes shake {

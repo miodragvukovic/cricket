@@ -10,7 +10,7 @@ html {
 
 body {
   position: relative;
-  background-image: url(dartbg.jpg);
+  background-image: url("http://www.tokkoro.com/picsup/1260591-darts.jpg");
   background-size: cover;
   background-position: right;
   overflow: hidden; }
@@ -445,6 +445,23 @@ body {
     right: 10px;
     color: #ccff00; }
 
+.victory-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 2; }
+  .victory-overlay h1 {
+    margin: auto;
+    font-size: 56px;
+    color: #ccff00; }
+  @media (max-width: 576px) {
+    .victory-overlay h1 {
+      font-size: 24px; } }
+
 @keyframes shake {
   0% {
     left: -5px; }
@@ -456,67 +473,5 @@ body {
     left: 5px; }
   100% {
     left: 0; } }
-.dugme {
-  position: relative;
-  width: 103px;
-  overflow: hidden;
-  cursor: pointer;
-  padding: 10px 0; }
-  .dugme .text {
-    left: -30px;
-    display: block;
-    font-size: 2rem;
-    width: 125px;
-    padding-left: 40px;
-    position: relative;
-    transition: .5s ease-out; }
-    .dugme .text:before {
-      content: "";
-      position: absolute;
-      top: 12px;
-      left: 6px;
-      width: 24px;
-      height: 2px;
-      background: #ccff00; }
-    .dugme .text:after {
-      content: "";
-      position: absolute;
-      top: 12px;
-      left: 95px;
-      width: 30px;
-      height: 2px;
-      background: #ccff00; }
-    .dugme .text .unutra {
-      position: absolute;
-      left: -7px;
-      top: 7px;
-      transform: rotate(45deg);
-      height: 12px;
-      width: 12px;
-      border: 2px solid #ccff00; }
-  .dugme:after {
-    content: "";
-    position: absolute;
-    top: 15px;
-    right: 0;
-    width: 0px;
-    height: 0px;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    border-left: 8px solid #ccff00; }
-  .dugme:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 1;
-    background-color: rgba(0, 0, 0, 0.2);
-    transition: .5s ease-out; }
-  .dugme:hover:before {
-    width: 0; }
-  .dugme:hover .text {
-    left: 0; }
 
 /*# sourceMappingURL=style.css.map */
