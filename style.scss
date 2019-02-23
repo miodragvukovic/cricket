@@ -500,6 +500,26 @@ body {
 		color: #ccff00;
 	}
 }
+.victory-overlay { 
+	display: none; 
+	position: fixed; 
+	top: 0; 
+	left: 0; 
+	height: 100%; 
+	width: 100%; 
+	background: rgba(0, 0, 0, 0.8); 
+	z-index: 2; 
+	h1 { 
+		margin: auto; 
+		font-size: 56px; 
+		color: #ccff00; 
+	} 
+	@media (max-width: 576px) { 
+		h1 { 
+			font-size: 24px; 
+		} 
+	} 
+} 
 @keyframes shake {
 	0% {left: -5px;}
 	25% {left: 5px;}

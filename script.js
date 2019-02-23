@@ -37,11 +37,13 @@ document.querySelector('.player-ok').addEventListener('click', function(){
 		playerValue = document.querySelector('.checked').value
 		for ( var i = 0; i < playerValue; i++ ) {
 			stringGlob += "<ul class='player'></ul>"
+			// stringGlob += "<ul data-full='0' class='player player-"+(i+1)+"'></ul>"
 		}
 	}
 	else {
 		for ( var i = 0; i < playerValue; i++ ) {
 			stringGlob += "<ul class='player'></ul>"
+			// stringGlob += "<ul data-full='0' class='player player-"+(i+1)+"'></ul>"
 		}
 	}
 	players.innerHTML = stringGlob
@@ -168,9 +170,9 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 						if ( scoreCalculate >= 3 ) {
 							return false
 						} else {
-							if ( click == 0 ) {
-								nextPlayer()
-							}
+							// if ( click == 0 ) {
+							// 	nextPlayer()
+							// }
 							elm.children[scoreCalculate].classList.add('scored')
 							if ( scoreCalculate <= 1 ) {
 								elm.children[scoreCalculate+1].classList.add('scored')
@@ -338,6 +340,7 @@ Array.from(document.getElementsByClassName('score-value')).forEach(function(el) 
 			click = 3
 		}
 		// AUTOMATSKO PREBACIVANJE NA SLEDECEG IGRACA
+		// ending()
 	})
 })
 document.querySelector('.double').addEventListener('click', function(){
@@ -427,7 +430,22 @@ function boom() {
 	}, 300)
 }
 // BOOOM!
-
+function ending() {
+	for ( var pl = 0; pl < player.length; pl++ ) {
+		var parent = player[pl]
+		var parentHasClass = player[pl].getElementsByClassName("full").length
+		var hasFull = player[pl].getAttribute("data-full")
+		var max = player[0].getAttribute("data-full")
+		parent.setAttribute('data-full', parentHasClass)
+		if ( parentHasClass == 7 ) {
+			document.querySelector('.victory-overlay').style.display = "flex"
+			document.querySelector('.victory-message').innerHTML = ""+parent.classList[1]+" has won!"
+		}
+	}
+	if ( Number(document.getElementById('round').innerHTML) > 20 ) {
+		alert("Noone won!")
+	}
+}
 
 
 
