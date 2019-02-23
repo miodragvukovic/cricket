@@ -23,7 +23,6 @@ var count = 0
 // GLOBALNE VARIJABLE
 var player = document.getElementsByClassName('player')
 var players = document.querySelector('#players')
-var fart = new Audio('fart.mp3')
 // VARIJABLE GLOBALNIH SELEKTORA
 for ( var i = 0; i < document.getElementsByClassName('player-val').length; i++ ) {
 	document.getElementsByClassName('player-val')[i].addEventListener('click', function(){
