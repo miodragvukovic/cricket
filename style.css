@@ -10,7 +10,7 @@ html {
 
 body {
   position: relative;
-  background-image: url("http://www.tokkoro.com/picsup/1260591-darts.jpg");
+  /*background-image: url("http://www.tokkoro.com/picsup/1260591-darts.jpg");*/
   background-size: cover;
   background-position: right;
   overflow: hidden; }
